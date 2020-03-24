@@ -34,7 +34,7 @@ def get_model_output(X_test):
     ELCO_d = np.pi*np.square(X_test[:,10]/20)-X_test[:,2]
     ELCO = np.divide(ELCO_n,ELCO_d)
     EL2 = np.square(np.divide(X_test[:,0],50*ELCO))
-    
+
     # Binarize aortic valve area (1 if <= 1 cm^2)
     AVA_b = X_test[:,2] <= 1
     # Binarize mean gradient (1 if >= 40 mmHg)
@@ -44,15 +44,16 @@ def get_model_output(X_test):
 
     # Load trained logistic regression model
     f = open('./lr_model.pkl','rb')
+
     lr = pickle.load(f)
     f.close()
-    
+
     # Load normalization factors for X_test
     # The logistic regression model requires that the input features are between 0 and 1, inclusive
     f = open('./norm_fact.pkl','rb')
     nf = pickle.load(f)
     f.close()
-    
+
     # Build input to logistic regression model
     X = np.zeros((X_test.shape[0],9))
     X[:,0] = np.copy(Q_b)
@@ -64,6 +65,6 @@ def get_model_output(X_test):
     X[:,6] = np.copy(X_test[:,8])
     X[:,7] = (np.copy(X_test[:,9])-nf[0,0])/nf[0,1]
     X[:,8] = (np.copy(EL2)-nf[1,0])/nf[1,1]
-    
+
     # Return output of the logistic regression model for X_test
     return lr.predict_proba(X)[:,1]
