@@ -1,6 +1,6 @@
-# medicalWebsiteMIT2020
+# MDCalc--MIT
 
-This is a risk calculator build to predict the likelihood of Aortic Valve Stenosis
+This is a risk calculator to predict the likelihood of Aortic Valve Stenosis.
 
 ## Installation
 
