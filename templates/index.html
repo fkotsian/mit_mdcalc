@@ -1,97 +1,7 @@
 <html>
     <head>
-        <style>
-            #content {
-                width: 60%;
-            }
-
-            /* Semantic-UI customizations */
-            .ui.disabled.button.green.opaque {
-                opacity: 1 !important;
-            }
-            .ui.disabled.button.opaque {
-                opacity: 1 !important;
-            }
-            .ui.toggle.checkbox,
-            .ui.toggle.checkbox label:before,
-            .ui.toggle.checkbox label:after
-            {
-                /*
-                height: 0 !important;
-                min-height: 0 !important;
-                */
-                width: 78px !important;
-                min-width: 78px !important;
-                z-index: -1;
-            }
-
-            .submit{
-                padding: 32px;
-                display: flex;
-                justify-content: center;
-            };
-            h3{
-                display: flex;
-                justify-content: center;
-            }
-            input[type=number], select, textarea {
-                font-family: Facit,Calibri,Helvetica,sans-serif;
-                height: 44px;
-                padding: 0 6px;
-                border-radius: 4px;
-                line-height: 47px;
-                box-sizing: border-box;
-                color: #595959;
-                font-size: 16px;
-                font-weight: 400;
-            }
-            input[type=number], textarea {
-                border: 1px solid #d7d7d7;
-                box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
-            }
-            .line{
-                display: flex;
-                padding: 16px;
-            }
-            .input{
-                padding-left: 16px;
-            }
-            .unit{
-                height: 44px;
-                padding: 0 6px;
-                border-radius: 4px;
-                line-height: 47px;
-                -ms-flex-item-align: stretch;
-                align-self: stretch;
-                display: inline-block;
-                vertical-align: middle;
-                text-align: center;
-                background-color: #f0f0f0;
-                border: 1px solid #d7d7d7;
-                box-sizing: border-box;
-            }
-            .tag{
-                width: 50%;
-            }
-            hr{
-            }
-            .wrapper{
-                margin-left: auto;
-                margin-right: auto;
-                width: 75%;
-            }
-            /* Responsive columns */
-            @media screen and (max-width: 600px) {
-                .wrapper{
-                    width: 100%;
-                }
-            }
-            .yes_no{
-                margin-left: 25%
-            }
-        </style>
-
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+        <link rel="stylesheet" href="static/css/index.css">
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -102,9 +12,11 @@
     </head>
 
     <body>
+        <div class="ui container" id="header">
+        </div>
         <div class="ui container" id="content">
             <div class="ui centered">
-                <h3>Aortic Valve Stenosis</h4>
+                <h3 id="title">Aortic Valve Stenosis Calculator</h4>
             </div>
             <br />
 
@@ -112,28 +24,28 @@
                 <div class="ui centered vertically divided equal width stackable grid">
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Transvalvular flow rate</label>
+                            <label class="">Transvalvular flow rate</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div>
+                            <div class="ui right labeled fluid input">
                                 <input required
-                                    oninvalid="this.setCustomValidity('Please provide patient\'s valve area.')"
+                                    oninvalid="this.setCustomValidity('Please provide transvalvular flow rate.')"
                                     oninput="this.setCustomValidity('')"
                                     type="number"
                                     step=.01
                                     name="tFlow"
                                 />
-                                <div class="unit"> mL/s </div>
+                                <div class="ui label">mL/s</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Mean pressure gradient across aortic valve</label>
+                            <label class="">Mean pressure gradient across aortic valve</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div>
+                            <div class="ui right labeled fluid input">
                                 <input required
                                     oninvalid="this.setCustomValidity('Please provide patient\'s pressure.')"
                                     oninput="this.setCustomValidity('')"
@@ -141,17 +53,17 @@
                                     step=.01
                                     name="pressure"
                                 />
-                                <div class="unit"> mmHg</div>
+                                <div class="ui label">mmHg</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Aortic valve area</label>
+                            <label class="">Aortic valve area</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div>
+                            <div class="ui right labeled fluid input">
                                 <input required
                                     oninvalid="this.setCustomValidity('Please provide patient\'s valve area.')"
                                     oninput="this.setCustomValidity('')"
@@ -159,14 +71,14 @@
                                     step=.01
                                     name="area"
                                 />
-                                <div class="unit"> cm<sup>2</sup></div>
+                                <div class="ui label"> cm<sup>2</sup></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Congestive heart failure (CHF) at baseline</label>
+                            <label class="">Congestive heart failure (CHF) at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
                             <div class="ui radio checkbox yes_no3" style="">
@@ -189,16 +101,16 @@
                                     value="true"
                                 />
                             </div>
-                            <div>
-                                <label for="yn3-off" class="ui button opaque uncheck yes_no3" onclick="markButton(event, 'yes_no3');">No</label>
-                                <label for="yn3-on" class="ui button opaque check yes_no3" onclick="markButton(event, 'yes_no3');">Yes</label>
+                            <div class="two ui buttons">
+                                <label for="yn3-off" class="ui button fluid opaque uncheck yes_no3" onclick="markButton(event, 'yes_no3');">No</label>
+                                <label for="yn3-on" class="ui button fluid opaque check yes_no3" onclick="markButton(event, 'yes_no3');">Yes</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Myocardial infarction (MI) at baseline</label>
+                            <label class="">Myocardial infarction (MI) at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
                             <div class="ui radio checkbox yes_no4" style="">
@@ -221,7 +133,7 @@
                                     value="true"
                                 />
                             </div>
-                            <div>
+                            <div class="two ui buttons">
                                 <label for="yn4-off" class="ui button opaque uncheck yes_no4" onclick="markButton(event, 'yes_no4');">No</label>
                                 <label for="yn4-on" class="ui button opaque check yes_no4" onclick="markButton(event, 'yes_no4');">Yes</label>
                             </div>
@@ -230,7 +142,7 @@
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Peripheral vascular disease (PVD) at baseline</label>
+                            <label class="">Peripheral vascular disease (PVD) at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
                             <div class="ui radio checkbox yes_no5">
@@ -253,7 +165,7 @@
                                     value="true"
                                 />
                             </div>
-                            <div>
+                            <div class="two ui buttons">
                                 <label for="yn5-off" class="ui button opaque uncheck yes_no5" onclick="markButton(event, 'yes_no5');">No</label>
                                 <label for="yn5-on" class="ui button opaque check yes_no5" onclick="markButton(event, 'yes_no5');">Yes</label>
                             </div>
@@ -262,7 +174,7 @@
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Left ventricular segmental wall motion abnormality</label>
+                            <label class="">Left ventricular segmental wall motion abnormality</label>
                         </div>
                         <div class="right aligned middle aligned column">
                             <div class="ui radio checkbox yes_no6">
@@ -285,7 +197,7 @@
                                     value="true"
                                 />
                             </div>
-                            <div>
+                            <div class="two ui buttons">
                                 <label for="yn6-off" class="ui button opaque uncheck yes_no6" onclick="markButton(event, 'yes_no6');">No</label>
                                 <label for="yn6-on" class="ui button opaque check yes_no6" onclick="markButton(event, 'yes_no6');">Yes</label>
                             </div>
@@ -294,7 +206,7 @@
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Hyperlipidemia at baseline</label>
+                            <label class="">Hyperlipidemia at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
                             <div class="ui toggle checkbox yes_no7">
@@ -317,7 +229,7 @@
                                     value="true"
                                 />
                             </div>
-                            <div>
+                            <div class="two ui buttons">
                                 <label for="yn7-off" class="ui button opaque uncheck yes_no7" onclick="markButton(event, 'yes_no7');">No</label>
                                 <label for="yn7-on" class="ui button opaque check yes_no7" onclick="markButton(event, 'yes_no7');">Yes</label>
                             </div>
@@ -326,7 +238,7 @@
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Chronic kidney disease (CKD) at baseline</label>
+                            <label class="">Chronic kidney disease (CKD) at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
                             <div class="ui radio checkbox yes_no8">
@@ -349,7 +261,7 @@
                                     value="true"
                                 />
                             </div>
-                            <div>
+                            <div class="two ui buttons">
                                 <label for="yn8-off" class="ui button opaque uncheck yes_no8" onclick="markButton(event, 'yes_no8');">No</label>
                                 <label for="yn8-on" class="ui button opaque check yes_no8" onclick="markButton(event, 'yes_no8');">Yes</label>
                             </div>
@@ -358,10 +270,10 @@
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Posterior wall thickness</label>
+                            <label class="">Posterior wall thickness</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div>
+                            <div class="ui right labeled fluid input">
                                 <input required
                                     oninvalid="this.setCustomValidity('Please provide patient\'s posterior wall thickness.')"
                                     oninput="this.setCustomValidity('')"
@@ -369,17 +281,17 @@
                                     step=.01
                                     name="thickness"
                                 />
-                                <div class="unit"> mm </div>
+                                <div class="ui label"> mm </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
-                            <label class="tag">Aortic sinus diameter</label>
+                            <label class="">Aortic sinus diameter</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div>
+                            <div class="ui right labeled fluid input">
                                 <input required
                                     oninvalid="this.setCustomValidity('Please provide patient\'s aortic sinus diameter.')"
                                     oninput="this.setCustomValidity('')"
@@ -387,15 +299,13 @@
                                     step=.01
                                     name="diameter"
                                 />
-                                <div class="unit"> mm </div>
+                                <div class="ui label"> mm </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="submit">
-                    <input class="ui button" type="submit" value="Submit" >
-                </div>
+                <input class="fluid ui button" id="submit" type="submit" value="Submit" >
             </form>
 
         <script type="text/javascript">

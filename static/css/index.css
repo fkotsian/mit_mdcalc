@@ -1,0 +1,98 @@
+#header {
+  min-height: 80px;
+  width: 100%;
+  background: #1bb193;
+  margin: 0 20%;
+}
+#title {
+  margin: 1rem 0 3rem;
+}
+#content {
+}
+#submit{
+  margin: 2rem 0;
+};
+
+/* Semantic-UI customizations */
+.ui.disabled.button.green.opaque {
+  opacity: 1 !important;
+}
+.ui.disabled.button.opaque {
+  opacity: 1 !important;
+}
+.ui.toggle.checkbox,
+.ui.toggle.checkbox label:before,
+.ui.toggle.checkbox label:after
+{
+  height: 0 !important;
+  min-height: 0 !important;
+  width: 78px !important;
+  min-width: 78px !important;
+  z-index: -1;
+}
+.button {
+  border: 1px solid silver !important;
+}
+.buttons .button:not(:last-child) {
+  border-right: 1px solid silver !important;
+}
+.buttons .button:last-child {
+  border-left: 0px solid silver !important;
+}
+.ui.label {
+  line-height: unset !important;
+}
+
+h3{
+  display: flex;
+  justify-content: center;
+}
+input[type=number], select, textarea {
+  font-family: Facit,Calibri,Helvetica,sans-serif;
+  height: 44px;
+  padding: 0 6px;
+  border-radius: 4px;
+  line-height: 47px;
+  box-sizing: border-box;
+  color: #595959;
+  font-size: 16px;
+  font-weight: 400;
+}
+input[type=number], textarea {
+  border: 1px solid #d7d7d7;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+}
+.line{
+  display: flex;
+  padding: 16px;
+}
+.input{
+  padding-left: 16px;
+}
+hr{
+}
+.wrapper{
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+/* Responsive columns */
+@media (min-width: 768px) {
+  #content {
+    margin: 5% 0;
+    width: 60%;
+    height: 100%;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  #content{
+    margin-top: 5%;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+  }
+  .ui.label {
+    padding-bottom: 0 !important;
+  }
+}
