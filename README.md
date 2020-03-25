@@ -21,3 +21,17 @@ FLASK_APP=app.py flask run
 ```
 
 This will run the app at http://localhost:5000.
+
+## Adding/Extending
+
+The UI is built with [Semantic UI](https://semantic-ui.com/introduction/getting-started.html) for ease of use.
+
+It uses some JQuery functions to toggle button colors and submit data to the model.
+
+Finally, it uses [Flask](https://flask.palletsprojects.com/en/1.1.x/quickstart/) to provide a simple JSON API to access the models.
+
+## Deploying/Making Live
+
+The app is set up for 1-click deploys to [Heroku](https://heroku.com).
+
+If you'd like to deploy to your own Heroku account, [here](https://medium.com/@gitaumoses4/deploying-a-flask-application-on-heroku-e509e5c76524) is a short and sweet tutorial.
