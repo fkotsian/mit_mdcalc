@@ -4,11 +4,32 @@
             #content {
                 width: 60%;
             }
+
+            /* Semantic-UI customizations */
+            .ui.disabled.button.green.opaque {
+                opacity: 1 !important;
+            }
+            .ui.disabled.button.opaque {
+                opacity: 1 !important;
+            }
+            .ui.toggle.checkbox,
+            .ui.toggle.checkbox label:before,
+            .ui.toggle.checkbox label:after
+            {
+                /*
+                height: 0 !important;
+                min-height: 0 !important;
+                */
+                width: 78px !important;
+                min-width: 78px !important;
+                z-index: -1;
+            }
+
             .submit{
                 padding: 32px;
                 display: flex;
                 justify-content: center;
-            }
+            };
             h3{
                 display: flex;
                 justify-content: center;
@@ -69,7 +90,15 @@
                 margin-left: 25%
             }
         </style>
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
     </head>
 
     <body>
@@ -87,7 +116,13 @@
                         </div>
                         <div class="right aligned middle aligned column">
                             <div>
-                                <input type=number step = .0001 name="tFlow" />
+                                <input required
+                                    oninvalid="this.setCustomValidity('Please provide patient\'s valve area.')"
+                                    oninput="this.setCustomValidity('')"
+                                    type="number"
+                                    step=.01
+                                    name="tFlow"
+                                />
                                 <div class="unit"> mL/s </div>
                             </div>
                         </div>
@@ -99,7 +134,13 @@
                         </div>
                         <div class="right aligned middle aligned column">
                             <div>
-                                <input type=number step = .0001 name="pressure" >
+                                <input required
+                                    oninvalid="this.setCustomValidity('Please provide patient\'s pressure.')"
+                                    oninput="this.setCustomValidity('')"
+                                    type=number
+                                    step=.01
+                                    name="pressure"
+                                />
                                 <div class="unit"> mmHg</div>
                             </div>
                         </div>
@@ -111,8 +152,14 @@
                         </div>
                         <div class="right aligned middle aligned column">
                             <div>
-                                <input type=number step = .0001 name="area" >
-                                <div class="unit"> cm^2</div>
+                                <input required
+                                    oninvalid="this.setCustomValidity('Please provide patient\'s valve area.')"
+                                    oninput="this.setCustomValidity('')"
+                                    type=number
+                                    step=.01
+                                    name="area"
+                                />
+                                <div class="unit"> cm<sup>2</sup></div>
                             </div>
                         </div>
                     </div>
@@ -122,9 +169,29 @@
                             <label class="tag">Congestive heart failure (CHF) at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div class="ui toggle checkbox">
-                                <input type="checkbox" name="yes_no3">
-                                <label></label>
+                            <div class="ui radio checkbox yes_no3" style="">
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide baseline CHF.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no3"
+                                    id="yn3-off"
+                                    value="false"
+                                />
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide baseline CHF.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no3"
+                                    id="yn3-on"
+                                    value="true"
+                                />
+                            </div>
+                            <div>
+                                <label for="yn3-off" class="ui button opaque uncheck yes_no3" onclick="markButton(event, 'yes_no3');">No</label>
+                                <label for="yn3-on" class="ui button opaque check yes_no3" onclick="markButton(event, 'yes_no3');">Yes</label>
                             </div>
                         </div>
                     </div>
@@ -134,9 +201,29 @@
                             <label class="tag">Myocardial infarction (MI) at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div class="ui toggle checkbox">
-                                <input type="radio" name="yes_no4">
-                                <label></label>
+                            <div class="ui radio checkbox yes_no4" style="">
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide baseline MI.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no4"
+                                    id="yn4-off"
+                                    value="false"
+                                />
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide baseline MI.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no4"
+                                    id="yn4-on"
+                                    value="true"
+                                />
+                            </div>
+                            <div>
+                                <label for="yn4-off" class="ui button opaque uncheck yes_no4" onclick="markButton(event, 'yes_no4');">No</label>
+                                <label for="yn4-on" class="ui button opaque check yes_no4" onclick="markButton(event, 'yes_no4');">Yes</label>
                             </div>
                         </div>
                     </div>
@@ -146,9 +233,29 @@
                             <label class="tag">Peripheral vascular disease (PVD) at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div class="ui toggle checkbox">
-                                <input type="radio" name="yes_no5">
-                                <label></label>
+                            <div class="ui radio checkbox yes_no5">
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide baseline PVD.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no5"
+                                    id="yn5-off"
+                                    value="false"
+                                />
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide baseline PVD.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no5"
+                                    id="yn5-on"
+                                    value="true"
+                                />
+                            </div>
+                            <div>
+                                <label for="yn5-off" class="ui button opaque uncheck yes_no5" onclick="markButton(event, 'yes_no5');">No</label>
+                                <label for="yn5-on" class="ui button opaque check yes_no5" onclick="markButton(event, 'yes_no5');">Yes</label>
                             </div>
                         </div>
                     </div>
@@ -158,9 +265,29 @@
                             <label class="tag">Left ventricular segmental wall motion abnormality</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div class="ui toggle checkbox">
-                                <input type="radio" name="yes_no6">
-                                <label></label>
+                            <div class="ui radio checkbox yes_no6">
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no6"
+                                    id="yn6-off"
+                                    value="false"
+                                />
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no6"
+                                    id="yn6-on"
+                                    value="true"
+                                />
+                            </div>
+                            <div>
+                                <label for="yn6-off" class="ui button opaque uncheck yes_no6" onclick="markButton(event, 'yes_no6');">No</label>
+                                <label for="yn6-on" class="ui button opaque check yes_no6" onclick="markButton(event, 'yes_no6');">Yes</label>
                             </div>
                         </div>
                     </div>
@@ -170,9 +297,29 @@
                             <label class="tag">Hyperlipidemia at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div class="ui toggle checkbox">
-                                <input type="radio" name="yes_no7">
-                                <label></label>
+                            <div class="ui toggle checkbox yes_no7">
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide baseline hyperlipidemia.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no7"
+                                    id="yn7-off"
+                                    value="false"
+                                />
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no7"
+                                    id="yn7-on"
+                                    value="true"
+                                />
+                            </div>
+                            <div>
+                                <label for="yn7-off" class="ui button opaque uncheck yes_no7" onclick="markButton(event, 'yes_no7');">No</label>
+                                <label for="yn7-on" class="ui button opaque check yes_no7" onclick="markButton(event, 'yes_no7');">Yes</label>
                             </div>
                         </div>
                     </div>
@@ -182,9 +329,29 @@
                             <label class="tag">Chronic kidney disease (CKD) at baseline</label>
                         </div>
                         <div class="right aligned middle aligned column">
-                            <div class="ui toggle checkbox">
-                                <input type="radio" name="yes_no8">
-                                <label></label>
+                            <div class="ui radio checkbox yes_no8">
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide baseline CKD.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no8"
+                                    id="yn8-off"
+                                    value="false"
+                                />
+                                <input
+                                    required
+                                    oninvalid="this.setCustomValidity('Please provide baseline CKD.')"
+                                    oninput="resetRadioValidity()"
+                                    type="radio"
+                                    name="yes_no8"
+                                    id="yn8-on"
+                                    value="true"
+                                />
+                            </div>
+                            <div>
+                                <label for="yn8-off" class="ui button opaque uncheck yes_no8" onclick="markButton(event, 'yes_no8');">No</label>
+                                <label for="yn8-on" class="ui button opaque check yes_no8" onclick="markButton(event, 'yes_no8');">Yes</label>
                             </div>
                         </div>
                     </div>
@@ -195,7 +362,13 @@
                         </div>
                         <div class="right aligned middle aligned column">
                             <div>
-                                <input type=number step = .0001 name="thickness" >
+                                <input required
+                                    oninvalid="this.setCustomValidity('Please provide patient\'s posterior wall thickness.')"
+                                    oninput="this.setCustomValidity('')"
+                                    type=number
+                                    step=.01
+                                    name="thickness"
+                                />
                                 <div class="unit"> mm </div>
                             </div>
                         </div>
@@ -207,18 +380,43 @@
                         </div>
                         <div class="right aligned middle aligned column">
                             <div>
-                                <input type=number step = .0001 name="diameter" >
+                                <input required
+                                    oninvalid="this.setCustomValidity('Please provide patient\'s aortic sinus diameter.')"
+                                    oninput="this.setCustomValidity('')"
+                                    type=number
+                                    step=.01
+                                    name="diameter"
+                                />
                                 <div class="unit"> mm </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class = "submit">
-                    <input type="submit" value="Submit" >
+                <div class="submit">
+                    <input class="ui button" type="submit" value="Submit" >
                 </div>
             </form>
 
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script type="text/javascript">
+            function markButton(event, className) {
+                // green to denote, disabled so cannot be clicked again
+                $(".button." + className).removeClass("green");
+                $(".button." + className).removeClass("disabled");
+                $(event.target).addClass("green");
+                $(event.target).addClass("disabled");
+            }
+
+            function resetRadioValidity(event) {
+                var rad = document.querySelectorAll('input[type=radio]')
+                rad.forEach(function(r) {
+                    r.setCustomValidity('')
+                });
+            }
+
+            function logTarget(event) {
+                console.log(event.target.value);
+            }
+        </script>
     </body>
 </html>
