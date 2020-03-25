@@ -12,11 +12,23 @@
     </head>
 
     <body>
-        <div class="ui container" id="header">
+        <div class="" id="stripe">
+            <div class="ui container eight column vertically padded stackable grid" id="header">
+                <div class="row">
+                    <div class="center aligned middle aligned column">LOGO</div>
+                    <div class="ten wide large screen only column"></div>
+                    <div class="center aligned middle aligned column">
+                        <a onclick="displayAVSCalc()">AVS Calc</a>
+                    </div>
+                    <div class="center aligned middle aligned column">
+                        <a onclick="displayCalc2()">Calc 2</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="ui container" id="content">
             <div class="ui centered">
-                <h3 id="title">Aortic Valve Stenosis Calculator</h4>
+                <h1 id="title">Aortic Valve Stenosis Calculator</h4>
             </div>
             <br />
 
@@ -308,7 +320,7 @@
                 <div id="result" class="ui large positive message hidden">
                 </div>
 
-                <input class="fluid ui button" id="submit" type="submit" value="Submit" >
+                <input class="fluid ui button md-green" id="submit" type="submit" value="Submit" >
                 <div id="accept-modal" class="ui modal">
                     <div class="header">Please accept the Terms of Service</div>
                     <div class="scrolling content">
@@ -349,9 +361,9 @@
         <script type="text/javascript">
             function markButton(event, className) {
                 // green to denote, disabled so cannot be clicked again
-                $(".button." + className).removeClass("green");
+                $(".button." + className).removeClass("md-green");
                 $(".button." + className).removeClass("disabled");
-                $(event.target).addClass("green");
+                $(event.target).addClass("md-green");
                 $(event.target).addClass("disabled");
             }
 
