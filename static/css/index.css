@@ -32,6 +32,9 @@
 .md-green:hover {
   background-color: #19a68a !important;
 }
+.hidden {
+  display: none;
+}
 
 body {
   font-family: Facit,Calibri,Helvetica,sans-serif !important;
