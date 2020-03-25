@@ -20,7 +20,7 @@
             </div>
             <br />
 
-            <form action="/" method="POST">
+            <form action="/" method="POST" onsubmit="submitAsync(event, this)">
                 <div class="ui centered vertically divided equal width stackable grid">
                     <div class="two column row">
                         <div class="left aligned middle aligned column">
@@ -305,8 +305,10 @@
                     </div>
                 </div>
 
-                <input class="fluid ui button" id="submit" type="submit" value="Submit" >
+                <div id="result" class="ui large positive message hidden">
+                </div>
 
+                <input class="fluid ui button" id="submit" type="submit" value="Submit" >
                 <div id="accept-modal" class="ui modal">
                     <div class="header">Please accept the Terms of Service</div>
                     <div class="scrolling content">
@@ -366,6 +368,26 @@
 
             function navToHomepage() {
                 window.location.href = "http://imes.mit.edu/initiatives/mit-mgh/";
+            }
+
+            function submitAsync(event, form) {
+                event.preventDefault();  // submit form asynchonously
+                fetch(form.action, {
+                    method: 'post',
+                    body: new FormData(form),
+                }).then(function(res) {
+                    return res.json()
+                }).then(function(json) {
+                    console.log("RESPONSE")
+                    console.log(json)
+                    populateResult(json["yh_syn"]);
+                    return json
+                })
+            }
+
+            function populateResult(resultData) {
+                $('#result').removeClass('hidden');
+                $('#result').html("<p>Result: " + resultData + "</p>");
             }
 
             // open modal on load

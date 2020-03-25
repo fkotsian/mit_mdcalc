@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import numpy as np
 from lr_model import get_model_output
 
@@ -28,11 +28,19 @@ def result():
 
           print(k, request.form.get(k, None), float(val))
           arr.append(float(val))
-      arr = np.array([arr])
-      yh_syn = get_model_output(arr)
+      model_inputs = np.array([arr])
+      res = get_model_output(model_inputs)
+      res = [el for el in res]
+      yh_syn = res[0]
       print(arr)
+      print("YH SYN")
       print(yh_syn)
-      return render_template("indexFilled.html",result = arr, ans = yh_syn)
+      print(type(yh_syn))
+      return jsonify({
+         "result": arr,
+         "yh_syn": yh_syn,
+      })
+      # return render_template("indexFilled.html",result = arr, ans = yh_syn)
 
 if __name__ == '__main__':
    app.run(host="0.0.0.0", port=80)
