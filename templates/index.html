@@ -15,7 +15,10 @@
         <div class="" id="stripe">
             <div class="ui container eight column vertically padded stackable grid" id="header">
                 <div class="row">
-                    <div class="center aligned middle aligned column">LOGO</div>
+                    <div class="center aligned middle aligned column">
+                        <img src="https://www.rle.mit.edu/cb/wp-content/uploads/2019/07/ccrg_logo_transparent_small.2.png"
+                        />
+                    </div>
                     <div class="ten wide large screen only column"></div>
                     <div class="center aligned middle aligned column">
                         <a onclick="displayCalc('calc-avs')">AVS Calc</a>
@@ -29,11 +32,11 @@
         <div class="ui container" id="content">
             <div class="calc" id="calc-avs">
                 <div class="ui centered">
-                    <h1 id="title">Aortic Valve Stenosis Calculator</h4>
+                    <h1 id="title">Aortic Stenosis Calculator</h4>
                 </div>
                 <br />
 
-                <form action="/" method="POST" onsubmit="submitAsync(event, this)">
+                <form action="/as" method="POST" onsubmit="submitAsync(event, this)">
                     <div class="ui centered vertically divided equal width stackable grid">
                         <div class="two column row">
                             <div class="left aligned middle aligned column">
@@ -94,13 +97,13 @@
                                 <label class="">Congestive heart failure (CHF) at baseline</label>
                             </div>
                             <div class="right aligned middle aligned column">
-                                <div class="ui radio checkbox yes_no3" style="">
+                                <div class="ui radio checkbox chf_baseline" style="">
                                     <input
                                         required
                                         oninvalid="this.setCustomValidity('Please provide baseline CHF.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no3"
+                                        name="chf_baseline"
                                         id="yn3-off"
                                         value="false"
                                     />
@@ -109,14 +112,14 @@
                                         oninvalid="this.setCustomValidity('Please provide baseline CHF.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no3"
+                                        name="chf_baseline"
                                         id="yn3-on"
                                         value="true"
                                     />
                                 </div>
                                 <div class="two ui buttons">
-                                    <label for="yn3-off" class="ui button fluid opaque uncheck yes_no3" onclick="markButton(event, 'yes_no3');">No</label>
-                                    <label for="yn3-on" class="ui button fluid opaque check yes_no3" onclick="markButton(event, 'yes_no3');">Yes</label>
+                                    <label for="yn3-off" class="ui button fluid opaque uncheck chf_baseline" onclick="markButton(event, 'chf_baseline');">No</label>
+                                    <label for="yn3-on" class="ui button fluid opaque check chf_baseline" onclick="markButton(event, 'chf_baseline');">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -126,13 +129,13 @@
                                 <label class="">Myocardial infarction (MI) at baseline</label>
                             </div>
                             <div class="right aligned middle aligned column">
-                                <div class="ui radio checkbox yes_no4" style="">
+                                <div class="ui radio checkbox mi_baseline" style="">
                                     <input
                                         required
                                         oninvalid="this.setCustomValidity('Please provide baseline MI.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no4"
+                                        name="mi_baseline"
                                         id="yn4-off"
                                         value="false"
                                     />
@@ -141,14 +144,14 @@
                                         oninvalid="this.setCustomValidity('Please provide baseline MI.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no4"
+                                        name="mi_baseline"
                                         id="yn4-on"
                                         value="true"
                                     />
                                 </div>
                                 <div class="two ui buttons">
-                                    <label for="yn4-off" class="ui button opaque uncheck yes_no4" onclick="markButton(event, 'yes_no4');">No</label>
-                                    <label for="yn4-on" class="ui button opaque check yes_no4" onclick="markButton(event, 'yes_no4');">Yes</label>
+                                    <label for="yn4-off" class="ui button opaque uncheck mi_baseline" onclick="markButton(event, 'mi_baseline');">No</label>
+                                    <label for="yn4-on" class="ui button opaque check mi_baseline" onclick="markButton(event, 'mi_baseline');">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -158,13 +161,13 @@
                                 <label class="">Peripheral vascular disease (PVD) at baseline</label>
                             </div>
                             <div class="right aligned middle aligned column">
-                                <div class="ui radio checkbox yes_no5">
+                                <div class="ui radio checkbox pvd_baseline">
                                     <input
                                         required
                                         oninvalid="this.setCustomValidity('Please provide baseline PVD.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no5"
+                                        name="pvd_baseline"
                                         id="yn5-off"
                                         value="false"
                                     />
@@ -173,14 +176,14 @@
                                         oninvalid="this.setCustomValidity('Please provide baseline PVD.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no5"
+                                        name="pvd_baseline"
                                         id="yn5-on"
                                         value="true"
                                     />
                                 </div>
                                 <div class="two ui buttons">
-                                    <label for="yn5-off" class="ui button opaque uncheck yes_no5" onclick="markButton(event, 'yes_no5');">No</label>
-                                    <label for="yn5-on" class="ui button opaque check yes_no5" onclick="markButton(event, 'yes_no5');">Yes</label>
+                                    <label for="yn5-off" class="ui button opaque uncheck pvd_baseline" onclick="markButton(event, 'pvd_baseline');">No</label>
+                                    <label for="yn5-on" class="ui button opaque check pvd_baseline" onclick="markButton(event, 'pvd_baseline');">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -190,13 +193,13 @@
                                 <label class="">Left ventricular segmental wall motion abnormality</label>
                             </div>
                             <div class="right aligned middle aligned column">
-                                <div class="ui radio checkbox yes_no6">
+                                <div class="ui radio checkbox wall_abnormality">
                                     <input
                                         required
                                         oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no6"
+                                        name="wall_abnormality"
                                         id="yn6-off"
                                         value="false"
                                     />
@@ -205,14 +208,14 @@
                                         oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no6"
+                                        name="wall_abnormality"
                                         id="yn6-on"
                                         value="true"
                                     />
                                 </div>
                                 <div class="two ui buttons">
-                                    <label for="yn6-off" class="ui button opaque uncheck yes_no6" onclick="markButton(event, 'yes_no6');">No</label>
-                                    <label for="yn6-on" class="ui button opaque check yes_no6" onclick="markButton(event, 'yes_no6');">Yes</label>
+                                    <label for="yn6-off" class="ui button opaque uncheck wall_abnormality" onclick="markButton(event, 'wall_abnormality');">No</label>
+                                    <label for="yn6-on" class="ui button opaque check wall_abnormality" onclick="markButton(event, 'wall_abnormality');">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -222,13 +225,13 @@
                                 <label class="">Hyperlipidemia at baseline</label>
                             </div>
                             <div class="right aligned middle aligned column">
-                                <div class="ui toggle checkbox yes_no7">
+                                <div class="ui toggle checkbox hyperlipidemia_baseline">
                                     <input
                                         required
                                         oninvalid="this.setCustomValidity('Please provide baseline hyperlipidemia.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no7"
+                                        name="hyperlipidemia_baseline"
                                         id="yn7-off"
                                         value="false"
                                     />
@@ -237,14 +240,14 @@
                                         oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no7"
+                                        name="hyperlipidemia_baseline"
                                         id="yn7-on"
                                         value="true"
                                     />
                                 </div>
                                 <div class="two ui buttons">
-                                    <label for="yn7-off" class="ui button opaque uncheck yes_no7" onclick="markButton(event, 'yes_no7');">No</label>
-                                    <label for="yn7-on" class="ui button opaque check yes_no7" onclick="markButton(event, 'yes_no7');">Yes</label>
+                                    <label for="yn7-off" class="ui button opaque uncheck hyperlipidemia_baseline" onclick="markButton(event, 'hyperlipidemia_baseline');">No</label>
+                                    <label for="yn7-on" class="ui button opaque check hyperlipidemia_baseline" onclick="markButton(event, 'hyperlipidemia_baseline');">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -254,13 +257,13 @@
                                 <label class="">Chronic kidney disease (CKD) at baseline</label>
                             </div>
                             <div class="right aligned middle aligned column">
-                                <div class="ui radio checkbox yes_no8">
+                                <div class="ui radio checkbox ckd_baseline">
                                     <input
                                         required
                                         oninvalid="this.setCustomValidity('Please provide baseline CKD.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no8"
+                                        name="ckd_baseline"
                                         id="yn8-off"
                                         value="false"
                                     />
@@ -269,14 +272,14 @@
                                         oninvalid="this.setCustomValidity('Please provide baseline CKD.')"
                                         oninput="resetRadioValidity()"
                                         type="radio"
-                                        name="yes_no8"
+                                        name="ckd_baseline"
                                         id="yn8-on"
                                         value="true"
                                     />
                                 </div>
                                 <div class="two ui buttons">
-                                    <label for="yn8-off" class="ui button opaque uncheck yes_no8" onclick="markButton(event, 'yes_no8');">No</label>
-                                    <label for="yn8-on" class="ui button opaque check yes_no8" onclick="markButton(event, 'yes_no8');">Yes</label>
+                                    <label for="yn8-off" class="ui button opaque uncheck ckd_baseline" onclick="markButton(event, 'ckd_baseline');">No</label>
+                                    <label for="yn8-on" class="ui button opaque check ckd_baseline" onclick="markButton(event, 'ckd_baseline');">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -360,11 +363,14 @@
                 </form>
             </div>
 
-            <div class="calc" id="calc-2">
+            <div class="calc hidden" id="calc-2">
                 <div class="ui centered">
                     <h1 id="title">Calc 2</h4>
                 </div>
                 <br />
+
+                <form action="/rlrvi" method="POST" onsubmit="submitAsync(event, this)">
+                </form>
 
             </div>
 
@@ -407,9 +413,21 @@
                 })
             }
 
+            function resultRow(outcome, risk, lower, upper) {
+                return "<p><span>" + outcome +
+                    "</span><span>" + risk +
+                    "</span><span>" + lower +
+                    "</span><span>" + upper +
+                    "</span></p>";
+            }
+
             function populateResult(resultData) {
                 $('#result').removeClass('hidden');
-                $('#result').html("<p>Result: " + resultData + "</p>");
+                var res = resultRow("Outcome", "Risk", "Lower 95% CI", "Upper 95% CI");
+                Object.entries(resultData).forEach(function(key, val) {
+                    res += resultRow(key, val[0], val[1], val[2])
+                })
+                $('#result').html(res)
             }
 
             // control calculator displays
