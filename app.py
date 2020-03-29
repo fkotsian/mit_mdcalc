@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import numpy as np
 from model_as.lr_model_cal import get_model_output
+import random
 
 app = Flask(__name__)
 
