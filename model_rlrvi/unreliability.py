@@ -1,6 +1,9 @@
+import numpy as np
+import pickle
+
 def unreliability(X):
     # Load trained alternative risk model
-    f = open('./pyyh.pkl','rb')
+    f = open('./model_rlrvi/pyyh.pkl','rb')
     pyyh = pickle.load(f)
     f.close()
 
@@ -10,7 +13,7 @@ def unreliability(X):
 	    yp[jj] = pyyh[yidx]
 
     # Load trained logistic regression model
-    f = open('./lr_model.pkl','rb')
+    f = open('./model_rlrvi/lr_model.pkl','rb')
     lr = pickle.load(f)
     f.close()
 

@@ -24,13 +24,13 @@
                         <a onclick="displayCalc('calc-avs')">Aortic Stenosis</a>
                     </div>
                     <div class="center aligned middle aligned column">
-                        <a onclick="displayCalc('calc-2')">RLSVI Risk Score</a>
+                        <a onclick="displayCalc('calc-rlrvi')">RLRVI Risk Score</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="ui container" id="content">
-            <div class="calc" id="calc-avs">
+            <div class="calc hidden" id="calc-avs">
                 <div class="ui centered">
                     <h1 id="title">Aortic Stenosis Calculator</h4>
                 </div>
@@ -328,7 +328,7 @@
                 </form>
             </div>
 
-            <div class="calc hidden" id="calc-2">
+            <div class="calc" id="calc-rlrvi">
                 <div class="ui centered">
                     <h1 id="title">Ridge Logistic Regression with Variable Inputs Risk Score</h4>
                 </div>
@@ -413,7 +413,6 @@
                                 <label class="">Killip class</label>
                             </div>
                             <div class="right aligned middle aligned column">
-                                <!-- TODO: needs clickability helper -->
                                 <div class="ui radio checkbox killip" style="">
                                     <input
                                         required
@@ -452,11 +451,43 @@
                                         value="4"
                                     />
                                 </div>
-                                <div class="two ui buttons">
+                                <div class="ui one vertical fluid buttons">
                                     <label for="killip-1" class="ui button fluid opaque check killip" onclick="markButton(event, 'killip');">No CHF</label>
                                     <label for="killip-2" class="ui button fluid opaque check killip" onclick="markButton(event, 'killip');">Rales</label>
                                     <label for="killip-3" class="ui button fluid opaque check killip" onclick="markButton(event, 'killip');">Pulmonary Edema</label>
                                     <label for="killip-4" class="ui button fluid opaque check killip" onclick="markButton(event, 'killip');">Cardiogenic Shock</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">Cardiac arrest on presentation</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox cardiac_arrest" style="">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate cardiac arrest.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="cardiac_arrest"
+                                        id="cardiac_arrest--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please provide baseline MI.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="cardiac_arrest"
+                                        id="cardiac_arrest--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="cardiac_arrest--off" class="ui button opaque uncheck cardiac_arrest" onclick="markButton(event, 'cardiac_arrest');">No</label>
+                                    <label for="cardiac_arrest--on" class="ui button opaque check cardiac_arrest" onclick="markButton(event, 'cardiac_arrest');">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -473,8 +504,8 @@
                                         oninput="resetRadioValidity()"
                                         type="radio"
                                         name="enzymes"
-                                        id="enzymes-1"
-                                        value="1"
+                                        id="enzymes--off"
+                                        value="2"
                                     />
                                     <input
                                         required
@@ -482,212 +513,388 @@
                                         oninput="resetRadioValidity()"
                                         type="radio"
                                         name="enzymes"
-                                        id="enzymes-2"
+                                        id="enzymes--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="ui two buttons">
+                                    <label for="enzymes--off" class="ui button fluid opaque check enzymes" onclick="markButton(event, 'enzymes');">Negative</label>
+                                    <label for="enzymes--on" class="ui button fluid opaque check enzymes" onclick="markButton(event, 'enzymes');">Positive</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">ST segment deviation</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox st_deviation" style="">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please provide ST segment deviation.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="st_deviation"
+                                        id="st_deviation--off"
                                         value="2"
                                     />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please provide ST segment deviation.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="st_deviation"
+                                        id="st_deviation--on"
+                                        value="1"
+                                    />
                                 </div>
                                 <div class="two ui buttons">
-                                    <label for="enzymes-1" class="ui button fluid opaque check enzymes" onclick="markButton(event, 'enzymes');">Positive</label>
-                                    <label for="enzymes-2" class="ui button fluid opaque check enzymes" onclick="markButton(event, 'enzymes');">Negative</label>
+                                    <label for="st_deviation--off" class="ui button opaque uncheck st_deviation" onclick="markButton(event, 'st_deviation');">No</label>
+                                    <label for="st_deviation--on" class="ui button opaque check st_deviation" onclick="markButton(event, 'st_deviation');">Yes</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="two column row">
                             <div class="left aligned middle aligned column">
-                                <label class="">Myocardial infarction (MI) at baseline</label>
-                            </div>
-                            <div class="right aligned middle aligned column">
-                                <div class="ui radio checkbox mi_baseline" style="">
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide baseline MI.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="mi_baseline"
-                                        id="yn4-off"
-                                        value="false"
-                                    />
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide baseline MI.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="mi_baseline"
-                                        id="yn4-on"
-                                        value="true"
-                                    />
-                                </div>
-                                <div class="two ui buttons">
-                                    <label for="yn4-off" class="ui button opaque uncheck mi_baseline" onclick="markButton(event, 'mi_baseline');">No</label>
-                                    <label for="yn4-on" class="ui button opaque check mi_baseline" onclick="markButton(event, 'mi_baseline');">Yes</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="two column row">
-                            <div class="left aligned middle aligned column">
-                                <label class="">Peripheral vascular disease (PVD) at baseline</label>
-                            </div>
-                            <div class="right aligned middle aligned column">
-                                <div class="ui radio checkbox pvd_baseline">
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide baseline PVD.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="pvd_baseline"
-                                        id="yn5-off"
-                                        value="false"
-                                    />
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide baseline PVD.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="pvd_baseline"
-                                        id="yn5-on"
-                                        value="true"
-                                    />
-                                </div>
-                                <div class="two ui buttons">
-                                    <label for="yn5-off" class="ui button opaque uncheck pvd_baseline" onclick="markButton(event, 'pvd_baseline');">No</label>
-                                    <label for="yn5-on" class="ui button opaque check pvd_baseline" onclick="markButton(event, 'pvd_baseline');">Yes</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="two column row">
-                            <div class="left aligned middle aligned column">
-                                <label class="">Left ventricular segmental wall motion abnormality</label>
-                            </div>
-                            <div class="right aligned middle aligned column">
-                                <div class="ui radio checkbox wall_abnormality">
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="wall_abnormality"
-                                        id="yn6-off"
-                                        value="false"
-                                    />
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="wall_abnormality"
-                                        id="yn6-on"
-                                        value="true"
-                                    />
-                                </div>
-                                <div class="two ui buttons">
-                                    <label for="yn6-off" class="ui button opaque uncheck wall_abnormality" onclick="markButton(event, 'wall_abnormality');">No</label>
-                                    <label for="yn6-on" class="ui button opaque check wall_abnormality" onclick="markButton(event, 'wall_abnormality');">Yes</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="two column row">
-                            <div class="left aligned middle aligned column">
-                                <label class="">Hyperlipidemia at baseline</label>
-                            </div>
-                            <div class="right aligned middle aligned column">
-                                <div class="ui toggle checkbox hyperlipidemia_baseline">
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide baseline hyperlipidemia.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="hyperlipidemia_baseline"
-                                        id="yn7-off"
-                                        value="false"
-                                    />
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="hyperlipidemia_baseline"
-                                        id="yn7-on"
-                                        value="true"
-                                    />
-                                </div>
-                                <div class="two ui buttons">
-                                    <label for="yn7-off" class="ui button opaque uncheck hyperlipidemia_baseline" onclick="markButton(event, 'hyperlipidemia_baseline');">No</label>
-                                    <label for="yn7-on" class="ui button opaque check hyperlipidemia_baseline" onclick="markButton(event, 'hyperlipidemia_baseline');">Yes</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="two column row">
-                            <div class="left aligned middle aligned column">
-                                <label class="">Chronic kidney disease (CKD) at baseline</label>
-                            </div>
-                            <div class="right aligned middle aligned column">
-                                <div class="ui radio checkbox ckd_baseline">
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide baseline CKD.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="ckd_baseline"
-                                        id="yn8-off"
-                                        value="false"
-                                    />
-                                    <input
-                                        required
-                                        oninvalid="this.setCustomValidity('Please provide baseline CKD.')"
-                                        oninput="resetRadioValidity()"
-                                        type="radio"
-                                        name="ckd_baseline"
-                                        id="yn8-on"
-                                        value="true"
-                                    />
-                                </div>
-                                <div class="two ui buttons">
-                                    <label for="yn8-off" class="ui button opaque uncheck ckd_baseline" onclick="markButton(event, 'ckd_baseline');">No</label>
-                                    <label for="yn8-on" class="ui button opaque check ckd_baseline" onclick="markButton(event, 'ckd_baseline');">Yes</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="two column row">
-                            <div class="left aligned middle aligned column">
-                                <label class="">Posterior wall thickness</label>
+                                <label class="">Admission weight</label>
                             </div>
                             <div class="right aligned middle aligned column">
                                 <div class="ui right labeled fluid input">
                                     <input required
-                                        oninvalid="this.setCustomValidity('Please provide patient\'s posterior wall thickness.')"
+                                        oninvalid="this.setCustomValidity('Please provide patient\'s weight.')"
                                         oninput="this.setCustomValidity('')"
                                         type=number
                                         step=.01
-                                        name="thickness"
+                                        name="weight"
                                     />
-                                    <div class="ui label"> mm </div>
+                                    <div class="ui label">kg</div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="two column row">
                             <div class="left aligned middle aligned column">
-                                <label class="">Aortic sinus diameter</label>
+                                <label class="">History of renal insufficiency</label>
                             </div>
                             <div class="right aligned middle aligned column">
-                                <div class="ui right labeled fluid input">
-                                    <input required
-                                        oninvalid="this.setCustomValidity('Please provide patient\'s aortic sinus diameter.')"
-                                        oninput="this.setCustomValidity('')"
-                                        type=number
-                                        step=.01
-                                        name="diameter"
+                                <div class="ui radio checkbox renal_insufficiency">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate history of renal insufficiency.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="renal_insufficiency"
+                                        id="renal_insufficiency--off"
+                                        value="2"
                                     />
-                                    <div class="ui label"> mm </div>
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate history of renal insufficiency.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="renal_insufficiency"
+                                        id="renal_insufficiency--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="renal_insufficiency--off" class="ui button opaque uncheck renal_insufficiency" onclick="markButton(event, 'renal_insufficiency');">No</label>
+                                    <label for="renal_insufficiency--on" class="ui button opaque check renal_insufficiency" onclick="markButton(event, 'renal_insufficiency');">Yes</label>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">History of congestive heart failure (CHF)</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox rlrvi_chf">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate history of congestive heart failure.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="rlrvi_chf"
+                                        id="rlrvi_chf--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate history of congestive heart failure.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="rlrvi_chf"
+                                        id="rlrvi_chf--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="rlrvi_chf--off" class="ui button opaque uncheck rlrvi_chf" onclick="markButton(event, 'rlrvi_chf');">No</label>
+                                    <label for="rlrvi_chf--on" class="ui button opaque check rlrvi_chf" onclick="markButton(event, 'rlrvi_chf');">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">History of peripheral arterial disease</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui toggle checkbox rlrvi_pad">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate history of peripheral arterial disease.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="rlrvi_pad"
+                                        id="rlrvi_pad--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate history of peripheral arterial disease.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="rlrvi_pad"
+                                        id="rlrvi_pad--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="rlrvi_pad--off" class="ui button opaque uncheck hyperlipidemia_baseline" onclick="markButton(event, 'rlrvi_pad');">No</label>
+                                    <label for="rlrvi_pad--on" class="ui button opaque check hyperlipidemia_baseline" onclick="markButton(event, 'rlrvi_pad');">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">Chronic warfarin use</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox warfarin">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate chronic warfarin use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="warfarin"
+                                        id="warfarin--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate chronic warfarin use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="warfarin"
+                                        id="warfarin--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="warfarin--off" class="ui button opaque uncheck warfarin" onclick="markButton(event, 'warfarin');">No</label>
+                                    <label for="warfarin--on" class="ui button opaque check warfarin" onclick="markButton(event, 'warfarin');">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">Oral beta blocker use, pre-hospital acute or within first 24 hours at hospital</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox use_betablocker">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate oral beta blocker use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_betablocker"
+                                        id="use_betablocker--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate oral beta blocker use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_betablocker"
+                                        id="use_betablocker--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="use_betablocker--off" class="ui button opaque uncheck use_betablocker" onclick="markButton(event, 'use_betablocker');">No</label>
+                                    <label for="use_betablocker--on" class="ui button opaque check use_betablocker" onclick="markButton(event, 'use_betablocker');">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">Statin use, pre-hospital acute or within first 24 hours at hospital</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox use_statin">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate statin use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_statin"
+                                        id="use_statin--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate statin use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_statin"
+                                        id="use_statin--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="use_statin--off" class="ui button opaque uncheck use_statin" onclick="markButton(event, 'use_statin');">No</label>
+                                    <label for="use_statin--on" class="ui button opaque check use_statin" onclick="markButton(event, 'use_statin');">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">Diuretic use, pre-hospital acute or within first 24 hours at hospital</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox use_diuretic">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate diuretic use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_diuretic"
+                                        id="use_diuretic--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate diuretic use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_diuretic"
+                                        id="use_diuretic--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="use_diuretic--off" class="ui button opaque uncheck use_diuretic" onclick="markButton(event, 'use_diuretic');">No</label>
+                                    <label for="use_diuretic--on" class="ui button opaque check use_diuretic" onclick="markButton(event, 'use_diuretic');">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">Insulin use, pre-hospital acute or within first 24 hours at hospital</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox use_insulin">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate insulin use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_insulin"
+                                        id="use_insulin--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate insulin use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_insulin"
+                                        id="use_insulin--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="use_insulin--off" class="ui button opaque uncheck use_insulin" onclick="markButton(event, 'use_insulin');">No</label>
+                                    <label for="use_insulin--on" class="ui button opaque check use_insulin" onclick="markButton(event, 'use_insulin');">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">IV inotropic agent use, pre-hospital acute or within first 24 hours at hospital</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox use_iv_inotropic">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate IV inotropic use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_iv_inotropic"
+                                        id="use_iv_inotropic--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate IV inotropic use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_iv_inotropic"
+                                        id="use_iv_inotropic--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="use_iv_inotropic--off" class="ui button opaque uncheck use_iv_inotropic" onclick="markButton(event, 'use_iv_inotropic');">No</label>
+                                    <label for="use_iv_inotropic--on" class="ui button opaque check use_iv_inotropic" onclick="markButton(event, 'use_iv_inotropic');">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="two column row">
+                            <div class="left aligned middle aligned column">
+                                <label class="">IV beta blocker use, pre-hospital acute or within first 24 hours at hospital</label>
+                            </div>
+                            <div class="right aligned middle aligned column">
+                                <div class="ui radio checkbox use_iv_betablocker">
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate statin use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_iv_betablocker"
+                                        id="use_iv_betablocker--off"
+                                        value="2"
+                                    />
+                                    <input
+                                        required
+                                        oninvalid="this.setCustomValidity('Please indicate statin use.')"
+                                        oninput="resetRadioValidity()"
+                                        type="radio"
+                                        name="use_iv_betablocker"
+                                        id="use_iv_betablocker--on"
+                                        value="1"
+                                    />
+                                </div>
+                                <div class="two ui buttons">
+                                    <label for="use_iv_betablocker--off" class="ui button opaque uncheck use_iv_betablocker" onclick="markButton(event, 'use_iv_betablocker');">No</label>
+                                    <label for="use_iv_betablocker--on" class="ui button opaque check use_iv_betablocker" onclick="markButton(event, 'use_iv_betablocker');">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
 
                     <div id="result" class="ui large message hidden">
@@ -774,6 +981,9 @@
             }
 
             function displayPercent(num) {
+                if (num === 'undefined') {
+                    return '';
+                }
                 // var rounded = Math.round((num + Number.EPSILON) * 100) / 100;
                 return (num * 100).toFixed(2) + "%";
             }

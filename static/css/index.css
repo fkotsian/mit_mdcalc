@@ -89,7 +89,7 @@ body {
 .buttons .button:not(:last-child) {
   border-right: 1px solid silver !important;
 }
-.buttons .button:last-child {
+.buttons:not(.vertical) .button:last-child {
   border-left: 0px solid silver !important;
 }
 .ui.label {
