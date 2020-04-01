@@ -31,7 +31,7 @@ def get_model_output(X_test):
     f.close()
 
     # Normalize X_test
-    for i in range(X_test.shape[1]):
+    for i in range(X_test.shape[0]):
 	    X_test[:,i] = (X_test[:,i]-norm_fact[i,1])/norm_fact[i,0]
 
     # Load multivariate normal distribution parameters
@@ -64,14 +64,15 @@ def get_model_output(X_test):
     for i in range(X_test.shape[0]):
 	    A               = s_inv[idx[i],idx[i]]
 	    C               = np.setdiff1d(range(X_test.shape[1]),idx[i])
-	    B				= -1*np.matmul(s_inv[idx[i],C],np.transpose(X_test[i,C])-mu[C])
+	    B		    = -1*np.matmul(s_inv[idx[i],C],np.transpose(X_test[i,C])-mu[C])
 	    X[i,C]          = X_test[i,C]
-	    print("SOLVING")
-	    print(i)
-	    print(A)
-	    print(B)
-	    X[i,idx[i]]     = np.linalg.solve(A,B)
-	    X[i,idx[i]]     = X[i,idx[i]]+np.transpose(mu[idx[i]])
+	    if len(idx) > 0:
+	        print("SOLVING")
+	        print(i)
+	        print(A)
+	        print(B)
+	        X[i,idx[i]]     = np.linalg.solve(A,B)
+	        X[i,idx[i]]     = X[i,idx[i]]+np.transpose(mu[idx[i]])
 
     # Load trained logistic regression model
     f = open('./model_rlrvi/lr_model.pkl','rb')
