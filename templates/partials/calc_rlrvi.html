@@ -231,15 +231,37 @@
                     <label class="">Admission weight</label>
                 </div>
                 <div class="right aligned middle aligned column">
+                    <div class="ui radio checkbox weight_metric">
+                        <input required
+                            oninvalid="this.setCustomValidity('Please provide patient\'s weight metric.')"
+                            oninput="this.setCustomValidity('')"
+                            type=radio
+                            name="weight_metric"
+                            id="weight_metric--kg"
+                            value="kg"
+                        />
+                        <input required
+                            oninvalid="this.setCustomValidity('Please provide patient\'s weight metric.')"
+                            oninput="this.setCustomValidity('')"
+                            type=radio
+                            name="weight_metric"
+                            id="weight_metric--lb"
+                            value="lb"
+                        />
+                    </div>
                     <div class="ui right labeled fluid input">
                         <input required
                             oninvalid="this.setCustomValidity('Please provide patient\'s weight.')"
                             oninput="this.setCustomValidity('')"
                             type=number
                             step=.01
-                            name="weight"
+                            name="weight_kg"
+                            id="weight_kg"
                         />
-                        <div class="ui label">kg</div>
+                        <div class="ui buttons">
+                            <label for="weight_metric--kg" class="ui label button opaque check weight_metric" onclick="markButton(event, 'weight_metric')">kg</label>
+                            <label for="weight_metric--lb" class="ui label button opaque check weight_metric" onclick="markButton(event, 'weight_metric')">lb</label>
+                        </div>
                     </div>
                 </div>
             </div>

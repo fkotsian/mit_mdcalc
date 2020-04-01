@@ -9,6 +9,8 @@ from model_rlrvi.unreliability import unreliability
 
 app = Flask(__name__)
 
+FACTOR_LBS_TO_KG = float(2.205)
+
 @app.route('/',methods = ['GET'])
 def index():
    calc_name = os.environ.get("CALC_NAME", "as")
@@ -63,7 +65,7 @@ def result_rlrvi():
          'cardiac_arrest',
          'enzymes',
          'st_deviation',
-         'weight',
+         'weight_kg',
          'renal_insufficiency',
          'rlrvi_chf',
          'rlrvi_pad',
@@ -74,12 +76,22 @@ def result_rlrvi():
          'use_insulin',
          'use_iv_inotropic',
          'use_iv_betablocker',
+         # helper param: 'weight_metric'
       ]
       arr = []
       print("INPUTS")
       for k in keys:
           val = request.form.get(k, None)
           print(k, request.form.get(k, None), float(val))
+
+          # translate weight from lbs, if needed
+          if k == "weight_kg" and request.form.get("weight_metric", None) == "lb":
+             val = float(val) / FACTOR_LBS_TO_KG
+
+          if k == "weight_kg":
+             print("WEIGHT!!! METRIC!!!!")
+             print(val, request.form.get("weight_metric"))
+
           arr.append(float(val))
 
       model_inputs = np.array([arr])
