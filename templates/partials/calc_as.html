@@ -1,0 +1,297 @@
+<div class="calc" id="calc-avs">
+    <div class="ui centered">
+        <h1 id="title">Aortic Stenosis Calculator</h4>
+    </div>
+    <br />
+
+    <form action="/as" method="POST" onsubmit="submitAsync(event, this)">
+        <div class="ui centered vertically divided equal width stackable grid">
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">Transvalvular flow rate</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui right labeled fluid input">
+                        <input required
+                            oninvalid="this.setCustomValidity('Please provide transvalvular flow rate.')"
+                            oninput="this.setCustomValidity('')"
+                            type="number"
+                            step=.01
+                            name="tFlow"
+                        />
+                        <div class="ui label">mL/s</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">Mean pressure gradient across aortic valve</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui right labeled fluid input">
+                        <input required
+                            oninvalid="this.setCustomValidity('Please provide patient\'s pressure.')"
+                            oninput="this.setCustomValidity('')"
+                            type=number
+                            step=.01
+                            name="pressure"
+                        />
+                        <div class="ui label">mmHg</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">Aortic valve area</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui right labeled fluid input">
+                        <input required
+                            oninvalid="this.setCustomValidity('Please provide patient\'s valve area.')"
+                            oninput="this.setCustomValidity('')"
+                            type=number
+                            step=.01
+                            name="area"
+                        />
+                        <div class="ui label"> cm<sup>2</sup></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">History of congestive heart failure (CHF)</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui radio checkbox chf_baseline" style="">
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of CHF.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="chf_baseline"
+                            id="yn3-off"
+                            value="false"
+                        />
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of CHF.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="chf_baseline"
+                            id="yn3-on"
+                            value="true"
+                        />
+                    </div>
+                    <div class="two ui buttons">
+                        <label for="yn3-off" class="ui button fluid opaque uncheck chf_baseline" onclick="markButton(event, 'chf_baseline');">No</label>
+                        <label for="yn3-on" class="ui button fluid opaque check chf_baseline" onclick="markButton(event, 'chf_baseline');">Yes</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">History of myocardial infarction (MI)</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui radio checkbox mi_baseline" style="">
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of MI.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="mi_baseline"
+                            id="yn4-off"
+                            value="false"
+                        />
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of MI.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="mi_baseline"
+                            id="yn4-on"
+                            value="true"
+                        />
+                    </div>
+                    <div class="two ui buttons">
+                        <label for="yn4-off" class="ui button opaque uncheck mi_baseline" onclick="markButton(event, 'mi_baseline');">No</label>
+                        <label for="yn4-on" class="ui button opaque check mi_baseline" onclick="markButton(event, 'mi_baseline');">Yes</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">History of peripheral vascular disease (PVD)</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui radio checkbox pvd_baseline">
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of PVD.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="pvd_baseline"
+                            id="yn5-off"
+                            value="false"
+                        />
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of PVD.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="pvd_baseline"
+                            id="yn5-on"
+                            value="true"
+                        />
+                    </div>
+                    <div class="two ui buttons">
+                        <label for="yn5-off" class="ui button opaque uncheck pvd_baseline" onclick="markButton(event, 'pvd_baseline');">No</label>
+                        <label for="yn5-on" class="ui button opaque check pvd_baseline" onclick="markButton(event, 'pvd_baseline');">Yes</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">Left ventricular segmental wall motion abnormality</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui radio checkbox wall_abnormality">
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="wall_abnormality"
+                            id="yn6-off"
+                            value="false"
+                        />
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide the motion abnormality.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="wall_abnormality"
+                            id="yn6-on"
+                            value="true"
+                        />
+                    </div>
+                    <div class="two ui buttons">
+                        <label for="yn6-off" class="ui button opaque uncheck wall_abnormality" onclick="markButton(event, 'wall_abnormality');">No</label>
+                        <label for="yn6-on" class="ui button opaque check wall_abnormality" onclick="markButton(event, 'wall_abnormality');">Yes</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">History of hyperlipidemia</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui toggle checkbox hyperlipidemia_baseline">
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of hyperlipidemia.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="hyperlipidemia_baseline"
+                            id="yn7-off"
+                            value="false"
+                        />
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of hyperlipidemia.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="hyperlipidemia_baseline"
+                            id="yn7-on"
+                            value="true"
+                        />
+                    </div>
+                    <div class="two ui buttons">
+                        <label for="yn7-off" class="ui button opaque uncheck hyperlipidemia_baseline" onclick="markButton(event, 'hyperlipidemia_baseline');">No</label>
+                        <label for="yn7-on" class="ui button opaque check hyperlipidemia_baseline" onclick="markButton(event, 'hyperlipidemia_baseline');">Yes</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">History of chronic kidney disease (CKD)</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui radio checkbox ckd_baseline">
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of CKD.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="ckd_baseline"
+                            id="yn8-off"
+                            value="false"
+                        />
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('Please provide history of CKD.')"
+                            oninput="resetRadioValidity()"
+                            type="radio"
+                            name="ckd_baseline"
+                            id="yn8-on"
+                            value="true"
+                        />
+                    </div>
+                    <div class="two ui buttons">
+                        <label for="yn8-off" class="ui button opaque uncheck ckd_baseline" onclick="markButton(event, 'ckd_baseline');">No</label>
+                        <label for="yn8-on" class="ui button opaque check ckd_baseline" onclick="markButton(event, 'ckd_baseline');">Yes</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">Posterior wall thickness</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui right labeled fluid input">
+                        <input required
+                            oninvalid="this.setCustomValidity('Please provide patient\'s posterior wall thickness.')"
+                            oninput="this.setCustomValidity('')"
+                            type=number
+                            step=.01
+                            name="thickness"
+                        />
+                        <div class="ui label"> mm </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
+                    <label class="">Aortic sinus diameter</label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui right labeled fluid input">
+                        <input required
+                            oninvalid="this.setCustomValidity('Please provide patient\'s aortic sinus diameter.')"
+                            oninput="this.setCustomValidity('')"
+                            type=number
+                            step=.01
+                            name="diameter"
+                        />
+                        <div class="ui label"> mm </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="result" class="ui large message hidden">
+        </div>
+
+        <input class="fluid ui button md-green" id="submit" type="submit" value="Submit" >
+    </form>
+</div>

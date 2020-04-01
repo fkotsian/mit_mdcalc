@@ -19,6 +19,9 @@
   color: white;
   text-decoration: none;
 }
+#accept-modal p {
+  line-height: 1.6rem;
+}
 #content {
 }
 #submit {

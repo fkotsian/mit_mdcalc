@@ -1,15 +1,18 @@
-from flask import Flask, render_template, request, jsonify
 import numpy as np
+import os
+import random
+
+from flask import Flask, render_template, request, jsonify
 from model_as.lr_model_cal import get_model_output as model_as
 from model_rlrvi.lr_model import get_model_output as model_rlrvi
 from model_rlrvi.unreliability import unreliability
-import random
 
 app = Flask(__name__)
 
 @app.route('/',methods = ['GET'])
 def index():
-   return render_template('index.html')
+   calc_name = os.environ.get("CALC_NAME", "as")
+   return render_template('index.html', calc_name=calc_name)
 
 @app.route('/as',methods = ['POST'])
 def result_as():
@@ -39,12 +42,12 @@ def result_as():
       r5yr_valve_replacement = (res[5], res[11], res[17])
 
       return jsonify({
-         "Combined outcome (3yrs)": r3yr_combined,
-         "Combined outcome (5yrs)": r5yr_combined,
-         "Mortality (3yrs)": r3yr_mortality,
-         "Mortality (5yrs)": r5yr_mortality,
-         "Mortality with no intervention (3yrs)": r3yr_valve_replacement,
-         "Mortality with no intervention (5yrs)": r5yr_valve_replacement,
+         #"All-cause mortality or aortic valve replacement (3yrs)": r3yr_combined,
+         #"All-cause mortality or aortic valve replacement (5yrs)": r5yr_combined,
+         "All-cause mortality (3yrs)": r3yr_mortality,
+         "All-cause mortality (5yrs)": r5yr_mortality,
+         #"All-cause mortality without an aortic valve replacement (3yrs)": r3yr_valve_replacement,
+         #"All-cause mortality without an aortic valve replacement (5yrs)": r5yr_valve_replacement,
       })
 
 @app.route('/rlrvi',methods = ['POST'])
