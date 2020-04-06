@@ -8,7 +8,7 @@
         <div class="ui centered vertically divided equal width stackable grid">
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Patient Age</label>
+                    <label class="">Patient Age<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui right labeled fluid input">
@@ -26,7 +26,7 @@
 
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Pulse Rate</label>
+                    <label class="">Pulse Rate<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui right labeled fluid input">
@@ -44,7 +44,7 @@
 
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Systolic blood pressure</label>
+                    <label class="">Systolic blood pressure<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui right labeled fluid input">
@@ -62,7 +62,7 @@
 
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Initial creatinine</label>
+                    <label class="">Initial creatinine<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui right labeled fluid input">
@@ -80,7 +80,7 @@
 
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Killip class</label>
+                    <label class="">Killip class<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox killip" style="">
@@ -132,7 +132,7 @@
 
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Cardiac arrest on presentation</label>
+                    <label class="">Cardiac arrest on presentation<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox cardiac_arrest" style="">
@@ -164,7 +164,7 @@
 
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Initial positive cardiac enzymes, including CK, CK-MB, and troponin</label>
+                    <label class="">Initial positive cardiac enzymes, including CK, CK-MB, and troponin<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox enzymes" style="">
@@ -196,7 +196,7 @@
 
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">ST segment deviation</label>
+                    <label class="">ST segment deviation<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox st_deviation" style="">
@@ -228,13 +228,13 @@
 
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Admission weight</label>
+                    <label class="">Admission weight<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox weight_metric">
                         <input required
                             oninvalid="this.setCustomValidity('Please provide patient\'s weight metric.')"
-                            oninput="this.setCustomValidity('')"
+                            oninput="resetRadioValidity()"
                             type=radio
                             name="weight_metric"
                             id="weight_metric--kg"
@@ -242,7 +242,7 @@
                         />
                         <input required
                             oninvalid="this.setCustomValidity('Please provide patient\'s weight metric.')"
-                            oninput="this.setCustomValidity('')"
+                            oninput="resetRadioValidity()"
                             type=radio
                             name="weight_metric"
                             id="weight_metric--lb"
@@ -273,7 +273,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox renal_insufficiency">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate history of renal insufficiency.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -282,7 +281,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate history of renal insufficiency.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -305,7 +303,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox rlrvi_chf">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate history of congestive heart failure.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -314,7 +311,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate history of congestive heart failure.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -337,7 +333,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui toggle checkbox rlrvi_pad">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate history of peripheral arterial disease.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -346,7 +341,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate history of peripheral arterial disease.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -369,7 +363,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox warfarin">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate chronic warfarin use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -378,7 +371,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate chronic warfarin use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -401,7 +393,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox use_betablocker">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate oral beta blocker use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -410,7 +401,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate oral beta blocker use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -433,7 +423,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox use_statin">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate statin use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -442,7 +431,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate statin use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -465,7 +453,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox use_diuretic">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate diuretic use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -474,7 +461,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate diuretic use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -497,7 +483,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox use_insulin">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate insulin use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -506,7 +491,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate insulin use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -529,7 +513,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox use_iv_inotropic">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate IV inotropic use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -538,7 +521,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate IV inotropic use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -561,7 +543,6 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox use_iv_betablocker">
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate statin use.')"
                             oninput="resetRadioValidity()"
                             type="radio"
@@ -570,7 +551,6 @@
                             value="2"
                         />
                         <input
-                            required
                             oninvalid="this.setCustomValidity('Please indicate statin use.')"
                             oninput="resetRadioValidity()"
                             type="radio"

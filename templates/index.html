@@ -65,7 +65,7 @@
                 $(event.target).addClass("disabled");
             }
 
-            function resetRadioValidity(event) {
+            function resetRadioValidity() {
                 var rad = document.querySelectorAll('input[type=radio]')
                 rad.forEach(function(r) {
                     r.setCustomValidity('')
@@ -95,29 +95,54 @@
                 })
             }
 
-            function displayPercent(num) {
-                if (num === 'undefined') {
+            function displayPercent(num, key) {
+                if (num === undefined || num === null) {
                     return '';
+                }
+                if (key === 'Unreliability' && typeof num === 'number') {
+                    return num.toFixed(2) + ' ';
+                }
+                if (typeof num === 'string') {
+                    // is a column title
+                    return num;
                 }
                 // var rounded = Math.round((num + Number.EPSILON) * 100) / 100;
                 return (num * 100).toFixed(2) + "%";
             }
 
             function resultRow(outcome, risk, lower, upper) {
-                return "<p class='resultRow'><span class='resultItem'>" + outcome +
-                    "</span><span class='resultItem'>" + risk +
-                    "</span><span class='resultItem'>" + lower +
-                    "</span><span class='resultItem'>" + upper +
-                    "</span></p>";
+                var res = "<p class='resultRow'>"
+                res += "<span class='resultItem'>" + outcome + "</span>"
+
+                if (risk != null) {
+                    res += "<span class='resultItem'>" + risk + "</span>"
+                }
+                if (lower != null) {
+                    res += "<span class='resultItem'>" + lower + "</span>"
+                }
+                if (upper != null) {
+                    res += "<span class='resultItem'>" + upper + "</span>"
+                }
+
+                res += "</p>";
+                return res;
+            }
+
+            function round(num, places=2) {
+                return (Math.round(num * (10**places)) / (10**places)).toFixed(places);
             }
 
             function populateResult(resultData) {
                 $('#result').removeClass('hidden');
-                var res = resultRow("Outcome", "Risk", "Lower 95% CI", "Upper 95% CI");
+                var res = ""
                 Object.entries(resultData).forEach(function(row) {
                     var key = row[0]
                     var val = row[1]
-                    res += resultRow(key, displayPercent(val[0]), displayPercent(val[1]), displayPercent(val[2]))
+                    if (key.includes("subgroup in which")) {
+                        res += resultRow(key + " " + round(val[0],4) + ".");
+                    } else {
+                        res += resultRow(key, displayPercent(val[0], key), displayPercent(val[1], key), displayPercent(val[2], key))
+                    }
                 })
                 $('#result').html(res)
             }

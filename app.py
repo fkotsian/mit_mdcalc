@@ -44,8 +44,9 @@ def result_as():
       r5yr_valve_replacement = (res[5], res[11], res[17])
 
       return jsonify({
-         #"All-cause mortality or aortic valve replacement (3yrs)": r3yr_combined,
-         #"All-cause mortality or aortic valve replacement (5yrs)": r5yr_combined,
+         "": ("Risk", "Lower 95% CI", "Upper 95% CI"),
+         "All-cause mortality or aortic valve replacement (3yrs)": r3yr_combined,
+         "All-cause mortality or aortic valve replacement (5yrs)": r5yr_combined,
          "All-cause mortality (3yrs)": r3yr_mortality,
          "All-cause mortality (5yrs)": r5yr_mortality,
          #"All-cause mortality without an aortic valve replacement (3yrs)": r3yr_valve_replacement,
@@ -82,7 +83,12 @@ def result_rlrvi():
       print("INPUTS")
       for k in keys:
           val = request.form.get(k, None)
-          print(k, request.form.get(k, None), float(val))
+          print(k, request.form.get(k, None), val and float(val))
+
+          # allow for nonrequired inputs
+          if val is None:
+             arr.append(np.nan)
+             continue
 
           # translate weight from lbs, if needed
           if k == "weight_kg" and request.form.get("weight_metric", None) == "lb":
@@ -95,12 +101,19 @@ def result_rlrvi():
           arr.append(float(val))
 
       model_inputs = np.array([arr])
-      rlrvi_prediction = model_rlrvi(model_inputs)
-      risk_score = unreliability(model_inputs)
+      print(arr)
+      print(model_inputs)
+      risk_score, lci, uci, unreliability = model_rlrvi(model_inputs)
+      print("RESULTS")
+      print(risk_score)
+      print(lci)
+      print(uci)
+      print(unreliability)
 
       return jsonify({
-         "RLRVI": rlrvi_prediction,
-         "Raw Score": (risk_score, None, None),
+         "": ("Value", "Lower 95% CI", "Upper 95% CI"),
+         "Risk Score": (risk_score[0], lci, uci),
+         "This patient is from a subgroup in which the model AUC is": (unreliability[0], None, None),
       })
 
 if __name__ == '__main__':
