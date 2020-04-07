@@ -12,15 +12,27 @@ Make sure you have `pip` installed (`which pip`), and install requirements.txt:
 pip install -r requirements.txt
 ```
 
-## Running the App
+## Running the App on Your Computer
 
 Make sure you have installed Flask as above, and run:
 
 ```
-FLASK_APP=app.py flask run
+FLASK_ENV=development FLASK_APP=app.py flask run
 ```
 
 This will run the app at http://localhost:5000.
+
+
+### Running AS vs RLRVI
+
+The calculator displayed is governed by a ENV variable named 'CALC_NAME'. 
+
+This is read in app.py.
+
+To change which calculator is displayed in DEVELOPMENT mode, change the CALC_NAME variable to the desired calculator:
+
+  - CALC_NAME = 'as'    -> runs the AS calculator
+  - CALC_NAME = 'rlrvi' -> runs the RLRVI calculator
 
 ## Adding/Extending
 
