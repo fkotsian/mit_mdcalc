@@ -76,10 +76,11 @@ def get_model_output(X_test):
     # Combined outcome at 3 years
     f = open('./model_rlrvi/cal.pkl','rb')
     e,r,ci = pickle.load(f)
+    e = e[0,:]
     f.close()
 
     # Find bin for model output and convert to risk score with confidence intervals
-    d = np.digitize(yh,e[0,:],False)
+    d = np.digitize(yh,e,False)
 
     if d < 0.5:
         d = 0
