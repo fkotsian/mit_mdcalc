@@ -23,19 +23,37 @@ def result_as():
       keys = ['tFlow','pressure','area','chf_baseline','mi_baseline','pvd_baseline','wall_abnormality','hyperlipidemia_baseline','ckd_baseline','thickness','diameter']
       arr = []
       print("INPUTS")
-      for k in keys:
-          val = request.form.get(k, None)
+      # for k in keys:
+      #     val = request.form.get(k, None)
 
-          # translate frontend radio button "value"s into 0/1
-          if val == 'true':
-              val = 1
-          elif val == 'false':
-              val = 0
+      #     # translate frontend radio button "value"s into 0/1
+      #     if val == 'true':
+      #         val = 1
+      #     elif val == 'false':
+      #         val = 0
 
-          print(k, request.form.get(k, None), float(val))
-          arr.append(float(val))
-      model_inputs = np.array([arr])
-      res = model_as(model_inputs)
+      #     print(k, request.form.get(k, None), float(val))
+      #     arr.append(float(val))
+      # model_inputs = np.array([arr])
+      # res = model_as(model_inputs)
+      res = (0.5549738219895288,
+ 0.7225130890052356,
+ 0.44502617801047123,
+ 0.5287958115183246,
+ 0.5104895104895105,
+ 0.6293706293706294,
+ 0.539512561556879,
+ 0.7074213028500234,
+ 0.4311168850455077,
+ 0.5120883312499264,
+ 0.49258244842160626,
+ 0.6114624324191157,
+ 0.5704350824221787,
+ 0.7376048751604478,
+ 0.45893547097543475,
+ 0.5455032917867227,
+ 0.5283965725574148,
+ 0.6472788263221431)
       r3yr_combined = (res[0], res[6], res[12])
       r5yr_combined = (res[1], res[7], res[13])
       r3yr_mortality = (res[2], res[8], res[14])
