@@ -66,6 +66,11 @@
 }
 .required {
   color: red;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+.required.large {
+  font-size: 1.36rem;
 }
 
 body {
