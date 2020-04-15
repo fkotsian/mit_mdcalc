@@ -44,14 +44,14 @@
   font-weight: 600;
 }
 #result .resultItem {
-  flex: 1;
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 #result .resultItem:first-child {
-  flex: 2;
+  flex: 3;
 }
 .md-green {
   color: white !important;

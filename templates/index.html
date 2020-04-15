@@ -114,16 +114,15 @@
 
             function resultRow(outcome, risk, lower, upper) {
                 var res = "<p class='resultRow'>"
-                res += "<span class='resultItem'>" + outcome + "</span>"
 
-                if (risk != null) {
-                    res += "<span class='resultItem'>" + risk + "</span>"
+                res += "<span class='resultItem'>" + outcome + "</span>"
+                res += "<span class='resultItem'>" + risk + "</span>"
+
+                if (lower != "" && upper != "") {
+                    res += "<span class='resultItem'>" + "[" + lower + "&nbsp;&nbsp;&nbsp;" + upper + "]" +"</span>"
                 }
-                if (lower != null) {
-                    res += "<span class='resultItem'>" + lower + "</span>"
-                }
-                if (upper != null) {
-                    res += "<span class='resultItem'>" + upper + "</span>"
+                if (lower != "" && upper == "") {
+                    res += "<span class='resultItem'>" + lower +"</span>"
                 }
 
                 res += "</p>";

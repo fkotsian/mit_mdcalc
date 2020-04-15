@@ -44,11 +44,11 @@ def result_as():
       r5yr_valve_replacement = (res[5], res[11], res[17])
 
       return jsonify({
-         "": ("Risk", "Lower 95% CI", "Upper 95% CI"),
-         "All-cause mortality or aortic valve replacement (3yrs)": r3yr_combined,
-         "All-cause mortality or aortic valve replacement (5yrs)": r5yr_combined,
-         "All-cause mortality (3yrs)": r3yr_mortality,
-         "All-cause mortality (5yrs)": r5yr_mortality,
+         "": ("Percentage", "95% Confidence Interval"),
+         #"All-cause mortality or aortic valve replacement (3yrs)": r3yr_combined,
+         #"All-cause mortality or aortic valve replacement (5yrs)": r5yr_combined,
+         "Mortality within 3 Years": r3yr_mortality,
+         "Mortality within 5 Years": r5yr_mortality,
          #"All-cause mortality without an aortic valve replacement (3yrs)": r3yr_valve_replacement,
          #"All-cause mortality without an aortic valve replacement (5yrs)": r5yr_valve_replacement,
       })
