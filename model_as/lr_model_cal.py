@@ -15,7 +15,7 @@ def load_from_pkl(pkl):
 def get_model_output(X_test):
     # Rows of X_test are patients
     # Columns of X_test:
-    # 0: Transvalvular flow rate in mL/s
+    # 0: Peak flow velocity in m/s
     # 1: Mean pressure gradient across aortic valve in mmHg
     # 2: Aortic valve area in cm^2
     # 3: Congestive heart failure (CHF) at baseline (0 = No, 1 = Yes)
@@ -43,6 +43,12 @@ def get_model_output(X_test):
     ELCO_d = np.pi*np.square(X_test[:,10]/20)-X_test[:,2]
     ELCO = np.divide(ELCO_n,ELCO_d)
     EL2 = np.square(np.divide(X_test[:,0],50*ELCO))
+
+	# Compute transvalvular flow rate from peak velocity, mean gradient, and aortic valve area
+    Q1 = X_test[:,1]+np.sqrt(X_test[:,1]*X_test[:,1]+32*X_test[:,1]*X_test[:,0]*X_test[:,0])
+    Q2 = Q1/(16*X_test[:,0])
+    Q3 = Q2*100
+    Q = Q3*X_test[:,2]
 
     # Binarize aortic valve area (1 if <= 1 cm^2)
     AVA_b = X_test[:,2] <= 1
@@ -76,67 +82,24 @@ def get_model_output(X_test):
 
     yh = lr.predict_proba(X)[:,1]
 
-    # Load calibration data
-    # Combined outcome at 3 years
-    e_comb_3, r_comb_3, ci_comb_3 = load_from_pkl('./model_as/cal_comb_3.pkl')
-    print("E COMB 3")
-    print(e_comb_3)
-    print(r_comb_3)
-    print(ci_comb_3)
+	# Calibrate model for 3-year mortality
+    b_3 = 0.4262
+    me_3 = 0.0668
+    yh_cal_3 = yh*b_3
+    yh_lci_3 = yh*(b_3-me_3)
+    yh_uci_3 = yh*(b_3+me_3)
 
-    # Combined outcome at 5 years
-    e_comb_5, r_comb_5, ci_comb_5 = load_from_pkl('./model_as/cal_comb_5.pkl')
-
-    # Mortality at 3 years
-    e_d_3, r_d_3, ci_d_3 = load_from_pkl('./model_as/cal_d_3.pkl')
-
-    # Mortality at 5 years
-    e_d_5, r_d_5, ci_d_5 = load_from_pkl('./model_as/cal_d_5.pkl')
-
-    # No valve replacement group at 3 years
-    e_vr_3, r_vr_3, ci_vr_3 = load_from_pkl('./model_as/cal_vr_3.pkl')
-
-    # No valve replacement group at 5 years
-    e_vr_5, r_vr_5, ci_vr_5 = load_from_pkl('./model_as/cal_vr_5.pkl')
-
-    # Find bin for model output and convert to risk score with confidence intervals
-    print("ARRY")
-    print(yh)
-    print(e_comb_3)
-    d = np.digitize(yh,e_comb_3,False)[0]
-
-    print("D")
-    print(d)
-
-    if d < 0.5:
-	    d = 0
-    elif d >= len(e_comb_3):
-	    d = len(e_comb_3)-1
-
-    yr_comb_3 = r_comb_3[d]
-    yr_comb_5 = r_comb_5[d]
-    yr_d_3 = r_d_3[d]
-    yr_d_5 = r_d_5[d]
-    yr_vr_3 = r_vr_3[d]
-    yr_vr_5 = r_vr_5[d]
-
-    lci_comb_3 = ci_comb_3[d,0]
-    uci_comb_3 = ci_comb_3[d,1]
-    lci_comb_5 = ci_comb_5[d,0]
-    uci_comb_5 = ci_comb_5[d,1]
-    lci_d_3 = ci_d_3[d,0]
-    uci_d_3 = ci_d_3[d,1]
-    lci_d_5 = ci_d_5[d,0]
-    uci_d_5 = ci_d_5[d,1]
-    lci_vr_3 = ci_vr_3[d,0]
-    uci_vr_3 = ci_vr_3[d,1]
-    lci_vr_5 = ci_vr_5[d,0]
-    uci_vr_5 = ci_vr_5[d,1]
+	# Calibrate model for 5-year mortality
+    b_5 = 0.5288
+    me_5 = 0.0702
+    yh_cal_5 = yh*b_5
+    yh_lci_5 = yh*(b_5-me_5)
+    yh_uci_5 = yh*(b_5+me_5)
 
     # Return risk scores and confidence intervals by metric
-    ret = (yr_comb_3,yr_comb_5,yr_d_3,yr_d_5,yr_vr_3,yr_vr_5,\
-	       lci_comb_3,lci_comb_5,lci_d_3,lci_d_5,lci_vr_3,lci_vr_5, \
-	       uci_comb_3,uci_comb_5,uci_d_3,uci_d_5,uci_vr_3,uci_vr_5)
+    ret = (yh_cal_3,yh_cal_5,yh_cal_3,yh_cal_5,yh_cal_3,yh_cal_5,\
+	       yh_lci_3,yh_lci_5,yh_lci_3,yh_lci_5,yh_lci_3,yh_lci_5, \
+	       yh_uci_3,yh_uci_5,yh_uci_3,yh_uci_5,yh_uci_3,yh_uci_5)
 
     from pprint import pprint
     pprint("RET")

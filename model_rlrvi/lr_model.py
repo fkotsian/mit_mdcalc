@@ -72,23 +72,12 @@ def get_model_output(X_test):
 
     yh = lr.predict_proba(X)[:,1]
 
-    # Load calibration data
-    # Combined outcome at 3 years
-    f = open('./model_rlrvi/cal.pkl','rb')
-    e,r,ci = pickle.load(f)
-    f.close()
-
-    # Find bin for model output and convert to risk score with confidence intervals
-    d = np.digitize(yh,e[0,:],False)
-
-    if d < 0.5:
-        d = 0
-    elif d >= len(e):
-        d = len(e)-1
-
-    yr = r[d]
-    lci = ci[d,0]
-    uci = ci[d,1]
+	# Calibrate output
+    b = 0.9659
+    me = 0.0452
+    yh_cal = yh*b
+    yh_lci = yh*(b-me)
+    yh_uci = yh*(b+me)
 
     # Load trained alternative risk model
     f = open('./model_rlrvi/pyyh.pkl','rb')
@@ -119,4 +108,4 @@ def get_model_output(X_test):
         ud = 1
 
     # Return risk scorei, confidence intervals, and unreliability score
-    return (yr,lci,uci,al[ud-1])
+    return (yh_cal,yh_lci,yh_uci,al[ud-1])
