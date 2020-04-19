@@ -18,7 +18,7 @@
         <div class="ui centered vertically divided equal width stackable grid">
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Transvalvular flow rate<span class="required"> *</span></label>
+                    <label class="">Peak velocity<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui right labeled fluid input">
@@ -29,7 +29,7 @@
                             step=.01
                             name="tFlow"
                         />
-                        <div class="ui label">mL/s</div>
+                        <div class="ui label">m/s</div>
                     </div>
                 </div>
             </div>
@@ -285,15 +285,36 @@
                     <label class="">Aortic sinus diameter<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">
+                    <div class="ui radio checkbox diameter_metric">
+                        <input required
+                            oninvalid="this.setCustomValidity('Please provide the sinus diameter metric.')"
+                            oninput="resetRadioValidity()"
+                            type=radio
+                            name="diameter_metric"
+                            id="diameter_metric--mm"
+                            value="mm"
+                        />
+                        <input required
+                            oninvalid="this.setCustomValidity('Please provide the sinus diameter metric.')"
+                            oninput="resetRadioValidity()"
+                            type=radio
+                            name="diameter_metric"
+                            id="diameter_metric--cm"
+                            value="cm"
+                        />
+                    </div>
                     <div class="ui right labeled fluid input">
                         <input required
                             oninvalid="this.setCustomValidity('Please provide patient\'s aortic sinus diameter.')"
                             oninput="this.setCustomValidity('')"
                             type=number
                             step=.01
-                            name="diameter"
+                            name="diameter_mm"
                         />
-                        <div class="ui label"> mm </div>
+                        <div class="ui buttons">
+                            <label for="diameter_metric--mm" class="ui label button opaque check diameter_metric" onclick="markButton(event, 'diameter_metric')">mm</label>
+                            <label for="diameter_metric--cm" class="ui label button opaque check diameter_metric" onclick="markButton(event, 'diameter_metric')">cm</label>
+                        </div>
                     </div>
                 </div>
             </div>

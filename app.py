@@ -10,6 +10,8 @@ from model_rlrvi.unreliability import unreliability
 app = Flask(__name__)
 
 FACTOR_LBS_TO_KG = float(2.205)
+FACTOR_VELOCIY_TO_FLOWRATE = float(1.5)
+FACTOR_CM_TO_MM = float(10)
 
 @app.route('/',methods = ['GET'])
 def index():
@@ -20,7 +22,7 @@ def index():
 def result_as():
    if request.method == 'POST':
       result = request.form
-      keys = ['tFlow','pressure','area','chf_baseline','mi_baseline','pvd_baseline','wall_abnormality','hyperlipidemia_baseline','ckd_baseline','thickness','diameter']
+      keys = ['tFlow','pressure','area','chf_baseline','mi_baseline','pvd_baseline','wall_abnormality','hyperlipidemia_baseline','ckd_baseline','thickness','diameter_mm']
       arr = []
       print("INPUTS")
       # for k in keys:
@@ -31,6 +33,18 @@ def result_as():
       #         val = 1
       #     elif val == 'false':
       #         val = 0
+      #
+      #     # convert peak velocity to flow rate
+      #     if k == "tFlow" and request.form.get("tFlow", None):
+      #        val = float(val) / FACTOR_VELOCITY_TO_FLOWRATE
+      #
+      #     # translate sinus diameter into mm, if needed
+      #     if k == "diameter_mm" and request.form.get("diameter_metric", None) == "cm":
+      #        val = float(val) * FACTOR_CM_TO_MM
+
+      #     if k == "diameter_mm":
+      #        print("DIAMETER is: ")
+      #        print(val, request.form.get("diameter_metric"))
 
       #     print(k, request.form.get(k, None), float(val))
       #     arr.append(float(val))
