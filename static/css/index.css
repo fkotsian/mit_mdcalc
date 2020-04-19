@@ -1,7 +1,8 @@
 #stripe {
   min-height: 80px;
   width: 100%;
-  background: #1bb193;
+  padding-top: 16px;
+  /* background: #1bb193; */
 }
 #header {
   min-height: 80px;
@@ -116,7 +117,7 @@ h3{
 /* Responsive columns */
 @media (min-width: 768px) {
   #content {
-    margin: 5% 0;
+    margin: 3% 0;
     width: 60%;
     height: 100%;
   }

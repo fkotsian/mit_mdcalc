@@ -13,18 +13,16 @@
 
     <body>
         <div class="" id="stripe">
-            <div class="ui container eight column vertically padded stackable grid" id="header">
-                <div class="row">
-                    <div class="center aligned middle aligned column">
-                        <a href="https://www.rle.mit.edu/cb/" target="_blank">
-                            <img src="https://www.rle.mit.edu/cb/wp-content/uploads/2019/07/ccrg_logo_transparent_small.2.png"
-                            />
-                        </a>
-                    </div>
-                    <div class="ten wide large screen only column"></div>
-                    <div class="center aligned middle aligned column">
-                    </div>
-                    <div class="center aligned middle aligned column">
+            <div class="ui container vertically padded relaxed stackable grid" id="header">
+                <div class="mobile only tablet only centered middle aligned row">
+                    {% include "partials/logos.html" %}
+                </div>
+
+                <!-- repeat the logos unhidden for desktop -->
+                <div class="computer only left aligned middle aligned row">
+                    <div class="one wide column"></div>
+                    <div class="six wide column">
+                        {% include "partials/logos.html" %}
                     </div>
                 </div>
             </div>
