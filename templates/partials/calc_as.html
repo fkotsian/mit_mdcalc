@@ -59,10 +59,11 @@
                 <div class="right aligned middle aligned column">
                     <div class="ui right labeled fluid input">
                         <input required
-                            oninvalid="this.setCustomValidity('Please provide patient\'s valve area.')"
+                            oninvalid="this.setCustomValidity('This calculator is only valid for patients with an aortic valve area less than 1.5.')"
                             oninput="this.setCustomValidity('')"
                             type=number
                             step=.01
+                            max=1.5
                             name="area"
                         />
                         <div class="ui label"> cm<sup>2</sup></div>
