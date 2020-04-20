@@ -67,51 +67,7 @@
                 </div>
             </div>
 
-
-        <!-- Initialize Firebase for analytics and hit counter -->
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-            https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
-
-        <script>
-          // Your web app's Firebase configuration
-          var firebaseConfig = {
-            apiKey: "AIzaSyB7vJ3uvy-DtMTINOAZdfFZk_F4MAbs4LA",
-            authDomain: "mdcalc-3f730.firebaseapp.com",
-            databaseURL: "https://mdcalc-3f730.firebaseio.com",
-            projectId: "mdcalc-3f730",
-            storageBucket: "mdcalc-3f730.appspot.com",
-            messagingSenderId: "284287899361",
-            appId: "1:284287899361:web:476e21a81c3da510a989a0",
-            measurementId: "G-L1H4QGXTY6"
-          };
-
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
-          firebase.analytics();
-
-          // increment hit count
-          var db = firebase.firestore();
-          const increment = firebase.firestore.FieldValue.increment(1);
-          const hitsRef = db.collection('hits').doc('total');
-          hitsRef.update({ count: increment })
-            .then(function() {
-                return hitsRef.get()
-            })
-            .then(function(hitDoc) {
-                var hitCount = hitDoc.data()["count"]
-                console.log("# OF HITS: ", hitCount);
-                $("#hitCount").html(hitCount);
-            })
-            .catch(function(error) {
-                console.log("ERROR UPDATING # of hits: ", error);
-            })
-
-        </script>
+            {% include 'partials/firebase.html' %}
 
         <script type="text/javascript">
             function markButton(event, className) {
