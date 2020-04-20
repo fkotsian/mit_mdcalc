@@ -116,9 +116,11 @@ def result_rlrvi():
           print(k, request.form.get(k, None), val and float(val))
 
           # allow for nonrequired inputs
-          if val is None:
+          if val is None or val == "":
              arr.append(np.nan)
              continue
+          else:
+             val = float(val)
 
           # translate weight from lbs, if needed
           if k == "weight_kg" and request.form.get("weight_metric", None) == "lb":
@@ -128,7 +130,7 @@ def result_rlrvi():
              print("WEIGHT is: ")
              print(val, request.form.get("weight_metric"))
 
-          arr.append(float(val))
+          arr.append(val)
 
       model_inputs = np.array([arr])
       print(arr)

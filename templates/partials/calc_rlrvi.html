@@ -260,11 +260,11 @@
 
             <div class="two column row">
                 <div class="left aligned middle aligned column">
-                    <label class="">Admission weight<span class="required"> *</span></label>
+                    <label class="">Admission weight</label>
                 </div>
                 <div class="right aligned middle aligned column">
                     <div class="ui radio checkbox weight_metric">
-                        <input required
+                        <input
                             oninvalid="this.setCustomValidity('Please provide patient\'s weight metric.')"
                             oninput="resetRadioValidity()"
                             type=radio
@@ -272,7 +272,7 @@
                             id="weight_metric--kg"
                             value="kg"
                         />
-                        <input required
+                        <input
                             oninvalid="this.setCustomValidity('Please provide patient\'s weight metric.')"
                             oninput="resetRadioValidity()"
                             type=radio
@@ -282,7 +282,7 @@
                         />
                     </div>
                     <div class="ui right labeled fluid input">
-                        <input required
+                        <input
                             oninvalid="this.setCustomValidity('Please provide patient\'s weight.')"
                             oninput="this.setCustomValidity('')"
                             type=number
