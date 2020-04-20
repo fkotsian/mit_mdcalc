@@ -70,6 +70,10 @@
 .md-green:hover {
   background-color: #19a68a !important;
 }
+.small {
+  font-size: 0.80rem;
+  margin-top: 1rem;
+}
 .hidden {
   display: none !important;
 }
