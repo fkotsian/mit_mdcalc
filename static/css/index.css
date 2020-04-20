@@ -28,6 +28,9 @@
 #submit {
   margin: 2rem 0;
 }
+#loading {
+  min-height: 4.2rem;
+}
 #result {
   display: flex;
   flex-flow: column nowrap;
@@ -40,9 +43,14 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 0 24px;
 }
 #result .resultRow:first-child {
   font-weight: 600;
+  padding-top: 12px;
+}
+#result .resultRow:last-child {
+  padding-bottom: 16px;
 }
 #result .resultItem {
   flex: 2;
@@ -52,7 +60,7 @@
   text-align: center;
 }
 #result .resultItem:first-child {
-  flex: 3;
+  flex: 2;
 }
 .md-green {
   color: white !important;

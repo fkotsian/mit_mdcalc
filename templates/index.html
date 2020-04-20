@@ -35,6 +35,17 @@
                 {% include "partials/calc_rlrvi.html" %}
             {% endif %}
 
+            <div class="ui center aligned basic segment">
+                <div class="ui horizontal statistic">
+                    <div class="value" id="hitCount">
+                        0
+                    </div>
+                    <div class="label">
+                        Views
+                    </div>
+                </div>
+            </div>
+
             <div id="accept-modal" class="ui modal small">
                 <div class="header">Please accept the Terms of Service</div>
                 <div class="scrolling content">
@@ -134,6 +145,8 @@
 
             function submitAsync(event, form) {
                 event.preventDefault();  // submit form asynchonously
+                $("#result").addClass("hidden");
+                $("#loading").removeClass("hidden");
                 fetch(form.action, {
                     method: 'post',
                     body: new FormData(form),
@@ -142,6 +155,7 @@
                 }).then(function(json) {
                     console.log("RESPONSE")
                     console.log(json)
+                    $("#loading.loading.segment").addClass("hidden");
                     populateResult(json);
                     return json
                 })
