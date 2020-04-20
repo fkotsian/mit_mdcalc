@@ -28,7 +28,7 @@
 #submit {
   margin: 2rem 0;
 }
-#loading {
+.loading {
   min-height: 4.2rem;
 }
 #result {

@@ -14,7 +14,7 @@
     </div>
     <br />
 
-    <form action="/as" method="POST" onsubmit="submitAsync(event, this)" novalidate>
+    <form action="/as" method="POST" onsubmit="submitAsync(event, this)">
         <div class="ui centered vertically divided equal width stackable grid">
             <div class="two column row">
                 <div class="left aligned middle aligned column">
@@ -62,9 +62,9 @@
                             oninvalid="this.setCustomValidity('This calculator is only valid for patients with an aortic valve area less than 1.5.')"
                             oninput="this.setCustomValidity('')"
                             type=number
-                            step=.01
-                            min=0.0001
-                            max=1.5
+                            step=".01"
+                            min="0.01"
+                            max="1.50"
                             name="area"
                         />
                         <div class="ui label"> cm<sup>2</sup></div>
@@ -322,9 +322,7 @@
             </div>
         </div>
 
-        <div id="loading" class="ui loading large basic segment hidden">
-        </div>
-        <div id="result" class="ui large segment hidden">
+        <div id="result" class="ui large loading segment hidden">
         </div>
 
         <input class="fluid ui button md-green" id="submit" type="submit" value="Submit" >

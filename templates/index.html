@@ -145,8 +145,8 @@
 
             function submitAsync(event, form) {
                 event.preventDefault();  // submit form asynchonously
-                $("#result").addClass("hidden");
-                $("#loading").removeClass("hidden");
+                $("#result").removeClass("hidden");
+                $("#result").addClass("loading");
                 fetch(form.action, {
                     method: 'post',
                     body: new FormData(form),
@@ -155,7 +155,7 @@
                 }).then(function(json) {
                     console.log("RESPONSE")
                     console.log(json)
-                    $("#loading.loading.segment").addClass("hidden");
+                    $("#result.loading").removeClass("loading");
                     populateResult(json);
                     return json
                 })
