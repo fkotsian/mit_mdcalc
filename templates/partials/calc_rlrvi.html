@@ -18,6 +18,28 @@
         <div class="ui centered vertically divided equal width stackable grid">
             <div class="two column row">
                 <div class="left aligned middle aligned column">
+                    <label class="">Does this patient present with an acute coronary syndrome?<span class="required"> *</span></label>
+                </div>
+                <div class="right aligned middle aligned column">
+                    <div class="ui checkbox presents_coronary" style="">
+                        <input
+                            required
+                            oninvalid="this.setCustomValidity('This calculator is only valid for patients who present with an acute coronary syndrome.')"
+                            onchange="this.setCustomValidity('')"
+                            type="checkbox"
+                            name="presents_coronary"
+                            id="presents_coronary"
+                            value="1"
+                        />
+                    </div>
+                    <div class="two ui buttons">
+                        <label for="presents_coronary" class="ui button opaque " onclick="toggleButton(event, 'presents_coronary');">Yes</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two column row">
+                <div class="left aligned middle aligned column">
                     <label class="">Patient Age<span class="required"> *</span></label>
                 </div>
                 <div class="right aligned middle aligned column">

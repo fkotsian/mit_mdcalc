@@ -65,6 +65,12 @@
                 $(event.target).addClass("disabled");
             }
 
+            function toggleButton(event, className) {
+                // green to denote, disabled so cannot be clicked again
+                $(".button." + className).toggleClass("md-green");
+                $(event.target).toggleClass("md-green");
+            }
+
             function resetRadioValidity() {
                 var rad = document.querySelectorAll('input[type=radio]')
                 rad.forEach(function(r) {
@@ -114,13 +120,18 @@
                 var res = "<p class='resultRow'>"
 
                 res += "<span class='resultItem'>" + outcome + "</span>"
-                res += "<span class='resultItem'>" + risk + "</span>"
 
-                if (lower != "" && upper != "") {
-                    res += "<span class='resultItem'>" + "[" + lower + "&nbsp;&nbsp;&nbsp;" + upper + "]" +"</span>"
+                if (typeof risk !== "undefined" && risk !== "") {
+                    res += "<span class='resultItem'>" + risk + "</span>"
                 }
-                if (lower != "" && upper == "") {
-                    res += "<span class='resultItem'>" + lower +"</span>"
+
+                if (typeof lower !== "undefined") {
+                    if (lower != "" && upper != "") {
+                        res += "<span class='resultItem'>" + "[" + lower + "&nbsp;&nbsp;&nbsp;" + upper + "]" +"</span>"
+                    }
+                    if (lower != "" && upper == "") {
+                        res += "<span class='resultItem'>" + lower +"</span>"
+                    }
                 }
 
                 res += "</p>";
@@ -137,7 +148,7 @@
                 Object.entries(resultData).forEach(function(row) {
                     var key = row[0]
                     var val = row[1]
-                    if (key.includes("subgroup in which")) {
+                    if (key.includes("Using a previously developed unreliability")) {
                         res += resultRow(key + " " + round(val[0],4) + ".");
                     } else {
                         res += resultRow(key, displayPercent(val[0], key), displayPercent(val[1], key), displayPercent(val[2], key))

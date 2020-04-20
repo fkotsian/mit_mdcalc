@@ -143,9 +143,9 @@ def result_rlrvi():
       print(unreliability)
 
       return jsonify({
-         "": ("Value", "Lower 95% CI", "Upper 95% CI"),
-         "Risk Score": (risk_score[0], lci, uci),
-         "This patient is from a subgroup in which the model AUC is": (unreliability[0], None, None),
+         "": ("Percentage", "95% Confidence Interval"),
+         "Mortality in 6 Months": (risk_score[0], lci, uci),
+         "Using a previously developed unreliability metric, the AUC for similar patients is": (unreliability[0], None, None),
       })
 
 if __name__ == '__main__':
