@@ -72,7 +72,12 @@
 }
 .small {
   font-size: 0.80rem;
+}
+.smallHeader {
   margin-top: 1rem;
+}
+.alignLeft {
+  text-align: left;
 }
 .hidden {
   display: none !important;

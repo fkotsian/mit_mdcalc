@@ -158,6 +158,8 @@
                 return (Math.round(num * (10**places)) / (10**places)).toFixed(places);
             }
 
+            var AS_EXCLUSION_CRITERIA = "<span class='small alignLeft'>These results assume that this patient does <b>not</b> have any of the following: Aortic dissection or coarctation, high left ventricular outflow tract velocity (≥ 1.6 m/s), and more than mild mitral/aortic valve regurgitation.</span>"
+
             function populateResult(resultData) {
                 $('#result').removeClass('hidden');
                 var res = ""
@@ -170,6 +172,9 @@
                         res += resultRow(key, displayPercent(val[0], key), displayPercent(val[1], key), displayPercent(val[2], key))
                     }
                 })
+                if ("{{calc_name}}" == "as") {
+                    res += resultRow(AS_EXCLUSION_CRITERIA);
+                }
                 $('#result').html(res)
             }
 
