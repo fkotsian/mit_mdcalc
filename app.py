@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import random
+import logging
 
 from flask import Flask, render_template, request, jsonify
 from model_as.lr_model_cal import get_model_output as model_as
@@ -9,16 +10,18 @@ from model_rlrvi.unreliability import unreliability
 
 app = Flask(__name__)
 app.debug = True
+logging.basicConfig(level=logging.DEBUG)
 
 FACTOR_LBS_TO_KG = float(2.205)
 FACTOR_CM_TO_MM = float(10)
 
 @app.route('/',methods = ['GET'])
 def index():
+   app.logger.info('Loading main calculator page')
    calc_name = os.environ.get("CALC_NAME", "as")
    return render_template('index.html', calc_name=calc_name)
 
-@app.route('/as',methods = ['POST'])
+@app.route('/as_old',methods = ['POST'])
 def result_as():
    if request.method == 'POST':
       result = request.form

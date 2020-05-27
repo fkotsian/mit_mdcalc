@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import random
+import logging
 
 from flask import Flask, render_template, request, jsonify
 from model_as.lr_model_cal import get_model_output as model_as
@@ -9,13 +10,17 @@ from model_rlrvi.unreliability import unreliability
 
 app = Flask(__name__)
 app.debug = True
+logging.basicConfig(level=logging.DEBUG)
 
 FACTOR_LBS_TO_KG = float(2.205)
 FACTOR_CM_TO_MM = float(10)
 
 @app.route('/',methods = ['POST'])
 def result_as():
+   print("GOT AS POST")
+   app.logger.info('ACCESSING AS endpoint')
    if request.method == 'POST':
+      app.logger.info('POST for AS endpoint')
       result = request.form
       keys = ['tFlow','pressure','area','chf_baseline','mi_baseline','pvd_baseline','wall_abnormality','hyperlipidemia_baseline','ckd_baseline','thickness','diameter_mm']
       arr = []
@@ -39,6 +44,8 @@ def result_as():
 
           print(k, request.form.get(k, None), float(val))
           arr.append(float(val))
+
+      app.logger.info('finished tracking data for AS endpoint')
 
       model_inputs = np.array([arr])
       res = model_as(model_inputs)
