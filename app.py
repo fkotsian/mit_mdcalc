@@ -8,6 +8,7 @@ from model_rlrvi.lr_model import get_model_output as model_rlrvi
 from model_rlrvi.unreliability import unreliability
 
 app = Flask(__name__)
+app.debug = True
 
 FACTOR_LBS_TO_KG = float(2.205)
 FACTOR_CM_TO_MM = float(10)
