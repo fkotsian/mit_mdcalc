@@ -24,9 +24,9 @@ FACTOR_CM_TO_MM = float(10)
 @app.route('/',methods = ['POST'])
 def result_as():
    print("GOT AS POST")
-   app.logger.info('ACCESSING AS endpoint')
+   app.logger.error('ACCESSING AS endpoint')
    if request.method == 'POST':
-      app.logger.info('POST for AS endpoint')
+      app.logger.error('POST for AS endpoint')
       result = request.form
       keys = ['tFlow','pressure','area','chf_baseline','mi_baseline','pvd_baseline','wall_abnormality','hyperlipidemia_baseline','ckd_baseline','thickness','diameter_mm']
       arr = []
@@ -51,7 +51,7 @@ def result_as():
           print(k, request.form.get(k, None), float(val))
           arr.append(float(val))
 
-      app.logger.info('finished tracking data for AS endpoint')
+      app.logger.error('finished tracking data for AS endpoint')
 
       model_inputs = np.array([arr])
       res = model_as(model_inputs)

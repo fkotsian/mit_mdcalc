@@ -24,7 +24,7 @@ FACTOR_CM_TO_MM = float(10)
 
 @app.route('/',methods = ['GET'])
 def index():
-   app.logger.info('Loading main calculator page')
+   app.logger.error('Loading main calculator page')
    calc_name = os.environ.get("CALC_NAME", "as")
    return render_template('index.html', calc_name=calc_name)
 
