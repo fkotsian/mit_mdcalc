@@ -1,7 +1,6 @@
 import numpy as np
 import os
 import random
-import logging
 
 from flask import Flask, render_template, request, jsonify
 from model_as.lr_model_cal import get_model_output as model_as
@@ -9,8 +8,15 @@ from model_rlrvi.lr_model import get_model_output as model_rlrvi
 from model_rlrvi.unreliability import unreliability
 
 app = Flask(__name__)
-app.debug = True
-logging.basicConfig(level=logging.DEBUG)
+
+# logging setup
+import logging
+from logging.handlers import RotatingFileHandler
+file_handler = RotatingFileHandler('mdcalc_as.log', maxBytes=1024 * 1024 * 100, backupCount=20)
+file_handler.setLevel(logging.ERROR)
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+file_handler.setFormatter(formatter)
+app.logger.addHandler(file_handler)
 
 FACTOR_LBS_TO_KG = float(2.205)
 FACTOR_CM_TO_MM = float(10)
