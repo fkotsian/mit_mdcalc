@@ -1,5 +1,8 @@
 import numpy as np
 import pickle
+import os
+
+dir = os.path.dirname(__file__)
 
 def get_model_output(X_test):
 # Rows of X_test are patients
@@ -26,7 +29,7 @@ def get_model_output(X_test):
 
     # Load normalization factors for X_test
     # The logistic regression model requires that the input features are between 0 and 1, inclusive
-    f = open('./model_rlrvi/norm_fact.pkl','rb')
+    f = open(os.path.join(dir, 'norm_fact.pkl'),'rb')
     nf = pickle.load(f)
     f.close()
 
@@ -35,10 +38,10 @@ def get_model_output(X_test):
         X_test[:,i] = (X_test[:,i]-nf[i,1])/nf[i,0]
 
 	# Load multivariate normal distribution parameters
-    f = open('./model_rlrvi/mvn_mu.pkl','rb')
+    f = open(os.path.join(dir, './mvn_mu.pkl'),'rb')
     mu = pickle.load(f)
     f.close()
-    f = open('./model_rlrvi/mvn_s.pkl','rb')
+    f = open(os.path.join(dir, './mvn_s.pkl'),'rb')
     s = pickle.load(f)
     f.close()
 
@@ -66,7 +69,7 @@ def get_model_output(X_test):
         X = np.copy(X_test)
 
     # Load trained logistic regression model
-    f = open('./model_rlrvi/lr_model.pkl','rb')
+    f = open(os.path.join(dir, './lr_model.pkl'),'rb')
     lr = pickle.load(f)
     f.close()
 
@@ -80,7 +83,7 @@ def get_model_output(X_test):
     yh_uci = yh*(b+me)
 
     # Load trained alternative risk model
-    f = open('./model_rlrvi/pyyh.pkl','rb')
+    f = open(os.path.join(dir, './pyyh.pkl'),'rb')
     pyyh = pickle.load(f)
     pyyh = pyyh['pyyh']
     f.close()
@@ -96,7 +99,7 @@ def get_model_output(X_test):
     # Unreliability score
     u = np.abs(yh-yp)
 
-    f = open('./model_rlrvi/u_cal.pkl','rb')
+    f = open(os.path.join(dir, './u_cal.pkl'),'rb')
     al,cl,_ = pickle.load(f)
     al = al[0]
     cl = cl[0]
