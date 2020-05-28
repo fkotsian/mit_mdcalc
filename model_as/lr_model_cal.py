@@ -1,5 +1,8 @@
 import numpy as np
 import pickle
+import os
+
+dir = os.path.dirname(__file__)
 
 # Tested with NumPy version 1.16.2
 
@@ -58,13 +61,13 @@ def get_model_output(X_test):
     Q_b = X_test[:,0] <= 210
 
     # Load trained logistic regression model
-    f = open('./model_as/lr_model.pkl','rb')
+    f = open(os.path.join(dir, './lr_model.pkl'),'rb')
     lr = pickle.load(f)
     f.close()
 
     # Load normalization factors for X_test
     # The logistic regression model requires that the input features are between 0 and 1, inclusive
-    f = open('./model_as/norm_fact.pkl','rb')
+    f = open(os.path.join(dir, './norm_fact.pkl'),'rb')
     nf = pickle.load(f)
     f.close()
 

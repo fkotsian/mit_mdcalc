@@ -1,7 +1,9 @@
-import numpy as np
 import os
+import sys
 import random
 import logging
+import numpy as np
+import os, sys; sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 from flask import Flask, render_template, request, jsonify
 from model_as.lr_model_cal import get_model_output as model_as
@@ -10,15 +12,6 @@ from model_rlrvi.unreliability import unreliability
 
 app = Flask(__name__)
 
-# logging setup
-import logging
-from logging.handlers import RotatingFileHandler
-file_handler = RotatingFileHandler('mdcalc_app.log', maxBytes=1024 * 1024 * 100, backupCount=20)
-file_handler.setLevel(logging.ERROR)
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-file_handler.setFormatter(formatter)
-app.logger.addHandler(file_handler)
-
 FACTOR_LBS_TO_KG = float(2.205)
 FACTOR_CM_TO_MM = float(10)
 
@@ -26,9 +19,10 @@ FACTOR_CM_TO_MM = float(10)
 def index():
    app.logger.error('Loading main calculator page')
    calc_name = os.environ.get("CALC_NAME", "as")
-   return render_template('index.html', calc_name=calc_name)
+   deploy_path = os.environ.get("DEPLOY_PATH", "")
+   return render_template('index.html', calc_name=calc_name, deploy_path=deploy_path)
 
-@app.route('/as_old',methods = ['POST'])
+@app.route('/as',methods = ['POST'])
 def result_as():
    if request.method == 'POST':
       result = request.form
