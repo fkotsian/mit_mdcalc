@@ -19,7 +19,7 @@ FACTOR_CM_TO_MM = float(10)
 def index():
    app.logger.error('Loading main calculator page')
    calc_name = 'rlrvi'
-   deploy_path = '/cb/calc-rlrvi'
+   deploy_path = '/calc-rlrvi'
    return render_template('index.html', calc_name=calc_name, deploy_path=deploy_path)
 
 @app.route('/rlrvi',methods = ['POST'])
